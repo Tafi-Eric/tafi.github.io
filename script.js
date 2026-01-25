@@ -22,7 +22,7 @@ const translations = {
                 <li>Corsair Pro 2*16GB 6000Mhz CL48</li>
                 <li>Fractal Terra Jade</li>
                 <li>SN850X 2Tb</li>
-                <li><s>CachyOS</s></li>
+                <li>CachyOS</li>
             </ul>
             <br>
             <h3><s>PC-Darwin-01 (2020-2026):</s></h3>
@@ -114,4 +114,5 @@ function toggleTheme() {
 }
 
 window.onload = () => showPage('home');
+
 
