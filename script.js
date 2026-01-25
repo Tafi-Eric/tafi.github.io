@@ -16,26 +16,26 @@ const translations = {
             <details open>
                 <summary>PC-Rubius-02 (2026-Present)</summary>
                 <ul>
-                    <li>Ryzen 7 9700X</li>
-                    <li>RX 9060 XT 16GB</li>
-                    <li>B850I AsRock</li>
-                    <li>SF750 Corsair</li>
-                    <li>Corsair Pro 2*16GB 6000Mhz CL48</li>
-                    <li>Fractal Terra Jade</li>
-                    <li>SN850X 2Tb</li>
+                    <li>- Ryzen 7 9700X</li>
+                    <li>- RX 9060 XT 16GB</li>
+                    <li>- B850I AsRock</li>
+                    <li>- SF750 Corsair</li>
+                    <li>- Corsair Pro 2*16GB 6000Mhz CL48</li>
+                    <li>- Fractal Terra Jade</li>
+                    <li>- SN850X 2Tb</li>
                 </ul>
             </details>
 
             <details>
                 <summary><s>PC-Darwin-01 (2020-2026)</s></summary>
                 <ul style="opacity: 0.6;">
-                    <li><s>Ryzen 7 2700X</s></li>
-                    <li><s>RTX 2060 6GB</s></li>
-                    <li><s>B450 Aorus Elite V.2</s></li>
-                    <li><s>Corsair TX650M</s></li>
-                    <li><s>Team Group Delta 2*8GB 3200Mhz CL16</s></li>
-                    <li><s>MSI MPG Gungir 110R</s></li>
-                    <li><s>500GB SSD M.2</s></li>
+                    <li><s>- Ryzen 7 2700X</s></li>
+                    <li><s>- RTX 2060 6GB</s></li>
+                    <li><s>- B450 Aorus Elite V.2</s></li>
+                    <li><s>- Corsair TX650M</s></li>
+                    <li><s>- Team Group Delta 2*8GB 3200Mhz CL16</s></li>
+                    <li><s>- MSI MPG Gungir 110R</s></li>
+                    <li><s>- 500GB SSD M.2</s></li>
                 </ul>
             </details>`
     },
@@ -56,26 +56,26 @@ const translations = {
             <details open>
                 <summary>PC-Rubius-02 (2026-Present)</summary>
                 <ul>
-                    <li>Ryzen 7 9700X</li>
-                    <li>RX 9060 XT 16GB</li>
-                    <li>B850I AsRock</li>
-                    <li>SF750 Corsair</li>
-                    <li>Corsair Pro 2*16GB 6000Mhz CL48</li>
-                    <li>Fractal Terra Jade</li>
-                    <li>SN850X 2Tb</li>
+                    <li>- Ryzen 7 9700X</li>
+                    <li>- RX 9060 XT 16GB</li>
+                    <li>- B850I AsRock</li>
+                    <li>- SF750 Corsair</li>
+                    <li>- Corsair Pro 2*16GB 6000Mhz CL48</li>
+                    <li>- Fractal Terra Jade</li>
+                    <li>- SN850X 2Tb</li>
                 </ul>
             </details>
 
             <details>
                 <summary><s>PC-Darwin-01 (2020-2026)</s></summary>
                 <ul style="opacity: 0.6;">
-                    <li><s>Ryzen 7 2700X</s></li>
-                    <li><s>RTX 2060 6GB</s></li>
-                    <li><s>B450 Aorus Elite V.2</s></li>
-                    <li><s>Corsair TX650M</s></li>
-                    <li><s>Team Group Delta 2*8GB 3200Mhz CL16</s></li>
-                    <li><s>MSI MPG Gungir 110R</s></li>
-                    <li><s>500GB SSD M.2</s></li>
+                    <li><s>- Ryzen 7 2700X</s></li>
+                    <li><s>- RTX 2060 6GB</s></li>
+                    <li><s>- B450 Aorus Elite V.2</s></li>
+                    <li><s>- Corsair TX650M</s></li>
+                    <li><s>- Team Group Delta 2*8GB 3200Mhz CL16</s></li>
+                    <li><s>- MSI MPG Gungir 110R</s></li>
+                    <li><s>- 500GB SSD M.2</s></li>
                 </ul>
             </details>`
     }
@@ -118,6 +118,7 @@ function toggleTheme() {
 }
 
 window.onload = () => showPage('home');
+
 
 
 
