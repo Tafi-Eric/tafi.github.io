@@ -11,13 +11,35 @@ const translations = {
                         <li><strong>Updates</strong> ➔ Explicar canvis principals de visió.</li>
                         <li><strong>Belongings</strong> ➔ Quines són aquelles eines que més aprecio i les seves especificacions.</li>
                         <li><strong>Books</strong> ➔ Llibres que he llegit i m'han semblat rellevants.</li>
-                      </ul>`
+                      </ul>`,
+        "belongings-content": `
+            <h3>PC-Rubius-02 (2026-Present):</h3>
+            <ul>
+                <li>Ryzen 7 9700X</li>
+                <li>RX 9060 XT 16GB</li>
+                <li>B850I AsRock</li>
+                <li>SF750 Corsair</li>
+                <li>Corsair Pro 2*16GB 6000Mhz CL48</li>
+                <li>Fractal Terra Jade</li>
+                <li>SN850X 2Tb</li>
+            </ul>
+            <br>
+            <h3><s>PC-Darwin-01 (2020-2026):</s></h3>
+            <ul style="opacity: 0.6;">
+                <li><s>Ryzen 7 2700X</s></li>
+                <li><s>RTX 2060 6GB</s></li>
+                <li><s>B450 Aorus Elite V.2</s></li>
+                <li><s>Corsair TX650M</s></li>
+                <li><s>Team Group Delta 2*8GB 3200Mhz CL16</s></li>
+                <li><s>MSI MPG Gungir 110R</s></li>
+                <li><s>500GB SSD M.2</s></li>
+            </ul>`
     },
     en: {
         "nav-home": "Home", "nav-journal": "Journal", "nav-projects": "Projects",
         "nav-updates": "Updates", "nav-belongings": "Belongings", "nav-books": "Books",
         "title-home": "Welcome",
-        "home-text": `Welcome to my journal where I will collect ideas, projects, and other things I find interesting.<br><br>
+        "home-text": `Welcome to your journal where I will collect ideas, projects, and other things I find interesting.<br><br>
                       The website is organized as follows:
                       <ul>
                         <li><strong>Journal</strong> ➔ Collection of loose ideas.</li>
@@ -25,7 +47,29 @@ const translations = {
                         <li><strong>Updates</strong> ➔ Explaining major changes in vision.</li>
                         <li><strong>Belongings</strong> ➔ The tools I value the most and their specifications.</li>
                         <li><strong>Books</strong> ➔ Books I have read and found relevant.</li>
-                      </ul>`
+                      </ul>`,
+        "belongings-content": `
+            <h3>PC-Rubius-02 (2026-Present):</h3>
+            <ul>
+                <li>Ryzen 7 9700X</li>
+                <li>RX 9060 XT 16GB</li>
+                <li>B850I AsRock</li>
+                <li>SF750 Corsair</li>
+                <li>Corsair Pro 2*16GB 6000Mhz CL48</li>
+                <li>Fractal Terra Jade</li>
+                <li>SN850X 2Tb</li>
+            </ul>
+            <br>
+            <h3><s>PC-Darwin-01 (2020-2026):</s></h3>
+            <ul style="opacity: 0.6;">
+                <li><s>Ryzen 7 2700X</s></li>
+                <li><s>RTX 2060 6GB</s></li>
+                <li><s>B450 Aorus Elite V.2</s></li>
+                <li><s>Corsair TX650M</s></li>
+                <li><s>Team Group Delta 2*8GB 3200Mhz CL16</s></li>
+                <li><s>MSI MPG Gungir 110R</s></li>
+                <li><s>500GB SSD M.2</s></li>
+            </ul>`
     }
 };
 
@@ -38,10 +82,12 @@ function showPage(pageId) {
     if (pageId === 'home') {
         titleEl.innerText = translations[currentLang]["title-home"];
         bodyEl.innerHTML = translations[currentLang]["home-text"];
+    } else if (pageId === 'belongings') {
+        titleEl.innerText = translations[currentLang]["nav-belongings"];
+        bodyEl.innerHTML = translations[currentLang]["belongings-content"];
     } else {
-        // Marcador para las otras páginas
         titleEl.innerText = translations[currentLang]["nav-" + pageId] || pageId;
-        bodyEl.innerHTML = "Contingut de " + pageId + " en preparació...";
+        bodyEl.innerHTML = currentLang === 'ca' ? "Contingut en preparació..." : "Content under development...";
     }
 }
 
@@ -51,14 +97,16 @@ function toggleLang() {
     document.querySelectorAll('[data-key]').forEach(el => {
         el.innerText = translations[currentLang][el.getAttribute('data-key')];
     });
-    showPage('home'); // Recarga la home para cambiar el idioma del texto largo
+    // Detectamos en qué página estamos para refrescar el idioma del contenido
+    const currentTitle = document.getElementById('page-title').innerText;
+    if (currentTitle === "Benvinguts" || currentTitle === "Welcome") showPage('home');
+    else if (currentTitle === "Belongings") showPage('belongings');
 }
 
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
-    document.getElementById('themeBtn').innerText = isLight ? "🌙 Fosc" : "☀️ Clar";
+    document.getElementById('themeBtn').innerText = isLight ? (currentLang === 'ca' ? "🌙 Fosc" : "🌙 Dark") : (currentLang === 'ca' ? "☀️ Clar" : "☀️ Light");
 }
 
-// Cargar la home al iniciar
 window.onload = () => showPage('home');
