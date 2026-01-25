@@ -9,8 +9,8 @@ const translations = {
                         <li><strong>Diari</strong> ➔ Recull d'idees soltes.</li>
                         <li><strong>Projectes</strong> ➔ Explicar i desenvolupar projectes personals que tinguin certa continuació o possible regularitat.</li>
                         <li><strong>Updates</strong> ➔ Explicar canvis principals de visió.</li>
-                        <li><strong>Belongings</strong> ➔ Quines són aquelles eines que més aprecio i les seves especificacions.</li>
-                        <li><strong>Books</strong> ➔ Llibres que he llegit i m'han semblat rellevants.</li>
+                        <li><strong>Actualitzacions</strong> ➔ Quines són aquelles eines que més aprecio i les seves especificacions.</li>
+                        <li><strong>Llibres</strong> ➔ Llibres que he llegit i m'han semblat rellevants.</li>
                       </ul>`,
         "belongings-content": `
             <h3>PC-Rubius-02 (2026-Present):</h3>
@@ -22,6 +22,7 @@ const translations = {
                 <li>Corsair Pro 2*16GB 6000Mhz CL48</li>
                 <li>Fractal Terra Jade</li>
                 <li>SN850X 2Tb</li>
+                <li><s>CachyOS</s></li>
             </ul>
             <br>
             <h3><s>PC-Darwin-01 (2020-2026):</s></h3>
@@ -33,6 +34,7 @@ const translations = {
                 <li><s>Team Group Delta 2*8GB 3200Mhz CL16</s></li>
                 <li><s>MSI MPG Gungir 110R</s></li>
                 <li><s>500GB SSD M.2</s></li>
+                <li><s>Windows 10</s></li>
             </ul>`
     },
     en: {
@@ -58,6 +60,7 @@ const translations = {
                 <li>Corsair Pro 2*16GB 6000Mhz CL48</li>
                 <li>Fractal Terra Jade</li>
                 <li>SN850X 2Tb</li>
+                <li><s>CachyOS</s></li>
             </ul>
             <br>
             <h3><s>PC-Darwin-01 (2020-2026):</s></h3>
@@ -69,6 +72,7 @@ const translations = {
                 <li><s>Team Group Delta 2*8GB 3200Mhz CL16</s></li>
                 <li><s>MSI MPG Gungir 110R</s></li>
                 <li><s>500GB SSD M.2</s></li>
+                <li><s>Windows 10</s></li>
             </ul>`
     }
 };
@@ -110,3 +114,4 @@ function toggleTheme() {
 }
 
 window.onload = () => showPage('home');
+
