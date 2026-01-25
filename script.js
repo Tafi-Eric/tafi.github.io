@@ -13,58 +13,40 @@ const translations = {
                         <li><strong>Llibres</strong> ➔ Llibres que he llegit i m'han semblat rellevants.</li>
                       </ul>`,
         "belongings-content": `
-            <p>Selecciona una màquina per veure'n la fitxa tècnica:</p>
+            <p>Selecciona una màquina per veure'n les entranyes:</p>
             <ul class="pc-list">
-                <li><a href="#table-rubius" class="pc-link">PC-Rubius-02 (2026-Present)</a></li>
-                <li><a href="#table-darwin" class="pc-link"><s>PC-Darwin-01 (2020-2026)</s></a></li>
+                <li><a href="#specs-rubius" class="pc-link">PC-Rubius-02 (2026-Present)</a></li>
+                <li><a href="#specs-darwin" class="pc-link"><s>PC-Darwin-01 (2020-2026)</s></a></li>
             </ul>
 
-            <div style="height: 30vh;"></div> 
+            <div style="height: 60vh;"></div> 
 
-            <div id="table-rubius" class="hardware-table-container">
-                <h3 class="table-caption">PC-RUBIUS-02 SPECS</h3>
-                <table class="hardware-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>CPU</td><td>Ryzen 7 9700X</td></tr>
-                        <tr><td>GPU</td><td>RX 9060 XT 16GB</td></tr>
-                        <tr><td>Motherboard</td><td>B850I AsRock</td></tr>
-                        <tr><td>PSU</td><td>SF750 Corsair</td></tr>
-                        <tr><td>RAM</td><td>Corsair Pro 2*16GB 6000Mhz CL48</td></tr>
-                        <tr><td>Case</td><td>Fractal Terra Jade</td></tr>
-                        <tr><td>Storage</td><td>SN850X 2Tb</td></tr>
-                    </tbody>
-                </table>
-                <a href="#content" class="back-up">↑ Tornar a la llista</a>
+            <div id="specs-rubius" class="spec-box">
+                <h3 class="box-title">ESPECIFICACIONS: PC-RUBIUS-02</h3>
+                <ul>
+                    <li><strong>CPU:</strong> Ryzen 7 9700X</li>
+                    <li><strong>GPU:</strong> RX 9060 XT 16GB</li>
+                    <li><strong>Board:</strong> B850I AsRock</li>
+                    <li><strong>PSU:</strong> SF750 Corsair</li>
+                    <li><strong>RAM:</strong> Corsair Pro 2*16GB 6000Mhz CL48</li>
+                    <li><strong>Case:</strong> Fractal Terra Jade</li>
+                    <li><strong>Storage:</strong> SN850X 2Tb</li>
+                </ul>
+                <a href="#content" class="back-up">↑ Torna a la llista</a>
             </div>
 
-            <div style="height: 20vh;"></div>
-
-            <div id="table-darwin" class="hardware-table-container old-pc">
-                <h3 class="table-caption"><s>PC-DARWIN-01 SPECS (Retired)</s></h3>
-                <table class="hardware-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><s>CPU</s></td><td><s>Ryzen 7 2700X</s></td></tr>
-                        <tr><td><s>GPU</s></td><td><s>RTX 2060 6GB</s></td></tr>
-                        <tr><td><s>Motherboard</s></td><td><s>B450 Aorus Elite V.2</s></td></tr>
-                        <tr><td><s>PSU</s></td><td><s>Corsair TX650M</s></td></tr>
-                        <tr><td><s>RAM</s></td><td><s>Team Group Delta 2*8GB 3200Mhz CL16</s></td></tr>
-                        <tr><td><s>Case</s></td><td><s>MSI MPG Gungir 110R</s></td></tr>
-                        <tr><td><s>Storage</s></td><td><s>500GB SSD M.2</s></td></tr>
-                    </tbody>
-                </table>
-                <a href="#content" class="back-up">↑ Tornar a la llista</a>
+            <div id="specs-darwin" class="spec-box old-pc">
+                <h3 class="box-title"><s>ESPECIFICACIONS: PC-DARWIN-01</s></h3>
+                <ul>
+                    <li><s><strong>CPU:</strong> Ryzen 7 2700X</s></li>
+                    <li><s><strong>GPU:</strong> RTX 2060 6GB</s></li>
+                    <li><s><strong>Board:</strong> B450 Aorus Elite V.2</s></li>
+                    <li><s><strong>PSU:</strong> Corsair TX650M</s></li>
+                    <li><s><strong>RAM:</strong> Team Group Delta 2*8GB 3200Mhz CL16</s></li>
+                    <li><s><strong>Case:</strong> MSI MPG Gungir 110R</s></li>
+                    <li><s><strong>Storage:</strong> 500GB SSD M.2</s></li>
+                </ul>
+                <a href="#content" class="back-up">↑ Torna a la llista</a>
             </div>`
     },
     en: {
@@ -81,59 +63,41 @@ const translations = {
                         <li><strong>Books</strong> ➔ Books I have read and found relevant.</li>
                       </ul>`,
         "belongings-content": `
-            <p>Selecciona una màquina per veure'n la fitxa tècnica:</p>
+            <p>Selecciona una màquina per veure'n les entranyes:</p>
             <ul class="pc-list">
-                <li><a href="#table-rubius" class="pc-link">PC-Rubius-02 (2026-Present)</a></li>
-                <li><a href="#table-darwin" class="pc-link"><s>PC-Darwin-01 (2020-2026)</s></a></li>
+                <li><a href="#specs-rubius" class="pc-link">PC-Rubius-02 (2026-Present)</a></li>
+                <li><a href="#specs-darwin" class="pc-link"><s>PC-Darwin-01 (2020-2026)</s></a></li>
             </ul>
 
-            <div style="height: 30vh;"></div> 
+            <div style="height: 60vh;"></div> 
 
-            <div id="table-rubius" class="hardware-table-container">
-                <h3 class="table-caption">PC-RUBIUS-02 SPECS</h3>
-                <table class="hardware-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>CPU</td><td>Ryzen 7 9700X</td></tr>
-                        <tr><td>GPU</td><td>RX 9060 XT 16GB</td></tr>
-                        <tr><td>Motherboard</td><td>B850I AsRock</td></tr>
-                        <tr><td>PSU</td><td>SF750 Corsair</td></tr>
-                        <tr><td>RAM</td><td>Corsair Pro 2*16GB 6000Mhz CL48</td></tr>
-                        <tr><td>Case</td><td>Fractal Terra Jade</td></tr>
-                        <tr><td>Storage</td><td>SN850X 2Tb</td></tr>
-                    </tbody>
-                </table>
-                <a href="#content" class="back-up">↑ Tornar a la llista</a>
+            <div id="specs-rubius" class="spec-box">
+                <h3 class="box-title">ESPECIFICACIONS: PC-RUBIUS-02</h3>
+                <ul>
+                    <li><strong>CPU:</strong> Ryzen 7 9700X</li>
+                    <li><strong>GPU:</strong> RX 9060 XT 16GB</li>
+                    <li><strong>Board:</strong> B850I AsRock</li>
+                    <li><strong>PSU:</strong> SF750 Corsair</li>
+                    <li><strong>RAM:</strong> Corsair Pro 2*16GB 6000Mhz CL48</li>
+                    <li><strong>Case:</strong> Fractal Terra Jade</li>
+                    <li><strong>Storage:</strong> SN850X 2Tb</li>
+                </ul>
+                <a href="#content" class="back-up">↑ Torna a la llista</a>
             </div>
 
-            <div style="height: 20vh;"></div>
-
-            <div id="table-darwin" class="hardware-table-container old-pc">
-                <h3 class="table-caption"><s>PC-DARWIN-01 SPECS (Retired)</s></h3>
-                <table class="hardware-table">
-                    <thead>
-                        <tr>
-                            <th>Component</th>
-                            <th>Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><s>CPU</s></td><td><s>Ryzen 7 2700X</s></td></tr>
-                        <tr><td><s>GPU</s></td><td><s>RTX 2060 6GB</s></td></tr>
-                        <tr><td><s>Motherboard</s></td><td><s>B450 Aorus Elite V.2</s></td></tr>
-                        <tr><td><s>PSU</s></td><td><s>Corsair TX650M</s></td></tr>
-                        <tr><td><s>RAM</s></td><td><s>Team Group Delta 2*8GB 3200Mhz CL16</s></td></tr>
-                        <tr><td><s>Case</s></td><td><s>MSI MPG Gungir 110R</s></td></tr>
-                        <tr><td><s>Storage</s></td><td><s>500GB SSD M.2</s></td></tr>
-                    </tbody>
-                </table>
-                <a href="#content" class="back-up">↑ Tornar a la llista</a>
-            </div>``
+            <div id="specs-darwin" class="spec-box old-pc">
+                <h3 class="box-title"><s>ESPECIFICACIONS: PC-DARWIN-01</s></h3>
+                <ul>
+                    <li><s><strong>CPU:</strong> Ryzen 7 2700X</s></li>
+                    <li><s><strong>GPU:</strong> RTX 2060 6GB</s></li>
+                    <li><s><strong>Board:</strong> B450 Aorus Elite V.2</s></li>
+                    <li><s><strong>PSU:</strong> Corsair TX650M</s></li>
+                    <li><s><strong>RAM:</strong> Team Group Delta 2*8GB 3200Mhz CL16</s></li>
+                    <li><s><strong>Case:</strong> MSI MPG Gungir 110R</s></li>
+                    <li><s><strong>Storage:</strong> 500GB SSD M.2</s></li>
+                </ul>
+                <a href="#content" class="back-up">↑ Torna a la llista</a>
+            </div>`
     }
 };
 
@@ -174,6 +138,7 @@ function toggleTheme() {
 }
 
 window.onload = () => showPage('home');
+
 
 
 
