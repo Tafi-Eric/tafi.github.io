@@ -5,35 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tafi Journal</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Creepster&family=Nosifer&family=Pirata+One&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode" data-lang="ca">
 
     <header>
         <div class="toggles">
-            <button onclick="toggleTheme()" id="themeBtn">☀️ Light</button>
+            <button onclick="toggleTheme()" id="themeBtn">☀️ Clar</button>
             <button onclick="toggleLang()" id="langBtn">EN</button>
         </div>
-        <h1 class="main-title">Tafi Journal</h1>
+        <h1 class="main-title" onclick="showPage('home')" style="cursor:pointer">Tafi Journal</h1>
     </header>
 
     <div class="container">
         <nav class="sidebar">
             <ul>
-                <li onclick="showPage('journal')" data-key="nav-journal">Journal</li>
-                <li onclick="showPage('make')" data-key="nav-make">Make</li>
+                <li onclick="showPage('home')" data-key="nav-home">Inici</li>
+                <li onclick="showPage('journal')" data-key="nav-journal">Diari</li>
+                <li onclick="showPage('projects')" data-key="nav-projects">Projectes</li>
                 <li onclick="showPage('updates')" data-key="nav-updates">Updates</li>
-                <li onclick="showPage('projects')" data-key="nav-projects">Projects</li>
                 <li onclick="showPage('belongings')" data-key="nav-belongings">Belongings</li>
-                <li onclick="showPage('library')" data-key="nav-library">Library</li>
+                <li onclick="showPage('books')" data-key="nav-books">Books</li>
             </ul>
         </nav>
 
         <main id="content">
             <section id="page-content">
-                <h2 id="page-title">Journal</h2>
-                <div id="page-body">Benvingut al teu diari...</div>
+                <h2 id="page-title">Benvinguts</h2>
+                <div id="page-body">
+                    </div>
             </section>
         </main>
     </div>
@@ -41,3 +42,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
