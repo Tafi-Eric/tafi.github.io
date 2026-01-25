@@ -1,52 +1,64 @@
 const translations = {
     ca: {
-        "nav-journal": "Diari", "nav-make": "Crear", "nav-updates": "Novetats",
-        "nav-projects": "Projectes", "nav-belongings": "Pertinences", "nav-library": "Biblioteca",
-        "welcome": "Benvingut al teu diari...", "theme-light": "☀️ Clar", "theme-dark": "🌙 Fosc"
+        "nav-home": "Inici", "nav-journal": "Diari", "nav-projects": "Projectes",
+        "nav-updates": "Updates", "nav-belongings": "Belongings", "nav-books": "Books",
+        "title-home": "Benvinguts",
+        "home-text": `Benvinguts al meu diari on faré un recull d'idees, projectes i d'altres coses que em semblin interessants.<br><br>
+                      La pàgina web està organitzada de la següent manera:
+                      <ul>
+                        <li><strong>Diari</strong> ➔ Recull d'idees soltes.</li>
+                        <li><strong>Projectes</strong> ➔ Explicar i desenvolupar projectes personals que tinguin certa continuació o possible regularitat.</li>
+                        <li><strong>Updates</strong> ➔ Explicar canvis principals de visió.</li>
+                        <li><strong>Belongings</strong> ➔ Quines són aquelles eines que més aprecio i les seves especificacions.</li>
+                        <li><strong>Books</strong> ➔ Llibres que he llegit i m'han semblat rellevants.</li>
+                      </ul>`
     },
     en: {
-        "nav-journal": "Journal", "nav-make": "Make", "nav-updates": "Updates",
-        "nav-projects": "Projects", "nav-belongings": "Belongings", "nav-library": "Library",
-        "welcome": "Welcome to your journal...", "theme-light": "☀️ Light", "theme-dark": "🌙 Dark"
+        "nav-home": "Home", "nav-journal": "Journal", "nav-projects": "Projects",
+        "nav-updates": "Updates", "nav-belongings": "Belongings", "nav-books": "Books",
+        "title-home": "Welcome",
+        "home-text": `Welcome to my journal where I will collect ideas, projects, and other things I find interesting.<br><br>
+                      The website is organized as follows:
+                      <ul>
+                        <li><strong>Journal</strong> ➔ Collection of loose ideas.</li>
+                        <li><strong>Projects</strong> ➔ Explaining and developing personal projects with a certain continuity or potential regularity.</li>
+                        <li><strong>Updates</strong> ➔ Explaining major changes in vision.</li>
+                        <li><strong>Belongings</strong> ➔ The tools I value the most and their specifications.</li>
+                        <li><strong>Books</strong> ➔ Books I have read and found relevant.</li>
+                      </ul>`
     }
 };
 
 let currentLang = 'ca';
 
-function toggleTheme() {
-    document.body.classList.toggle('light-mode');
-    const btn = document.getElementById('themeBtn');
-    if(document.body.classList.contains('light-mode')) {
-        btn.innerText = currentLang === 'ca' ? "🌙 Fosc" : "🌙 Dark";
+function showPage(pageId) {
+    const titleEl = document.getElementById('page-title');
+    const bodyEl = document.getElementById('page-body');
+
+    if (pageId === 'home') {
+        titleEl.innerText = translations[currentLang]["title-home"];
+        bodyEl.innerHTML = translations[currentLang]["home-text"];
     } else {
-        btn.innerText = currentLang === 'ca' ? "☀️ Clar" : "☀️ Light";
+        // Marcador para las otras páginas
+        titleEl.innerText = translations[currentLang]["nav-" + pageId] || pageId;
+        bodyEl.innerHTML = "Contingut de " + pageId + " en preparació...";
     }
 }
 
 function toggleLang() {
     currentLang = currentLang === 'ca' ? 'en' : 'ca';
     document.getElementById('langBtn').innerText = currentLang === 'ca' ? 'EN' : 'CA';
-    
-    // Actualizar menú
     document.querySelectorAll('[data-key]').forEach(el => {
         el.innerText = translations[currentLang][el.getAttribute('data-key')];
     });
+    showPage('home'); // Recarga la home para cambiar el idioma del texto largo
 }
 
-function showPage(pageId) {
-    const title = document.getElementById('page-title');
-    const body = document.getElementById('page-body');
-    
-    // Aquí puedes personalizar el contenido de cada página
-    const content = {
-        journal: { title: "Journal", text: "Espai per escriure el teu dia a dia..." },
-        make: { title: "Make", text: "Projectes en creació..." },
-        updates: { title: "Updates", text: "Últimes actualitzacions del sistema." },
-        projects: { title: "Projects", text: "Llista de treballs finalitzats." },
-        belongings: { title: "Belongings", text: "Inventari personal." },
-        library: { title: "Library", text: "Recull de llibres i referències." }
-    };
-
-    title.innerText = content[pageId].title;
-    body.innerText = content[pageId].text;
+function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    document.getElementById('themeBtn').innerText = isLight ? "🌙 Fosc" : "☀️ Clar";
 }
+
+// Cargar la home al iniciar
+window.onload = () => showPage('home');
