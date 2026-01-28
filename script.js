@@ -7,96 +7,190 @@ const translations = {
                       La pàgina web està organitzada de la següent manera:
                       <ul>
                         <li><strong>Diari</strong> ➔ Recull d'idees soltes.</li>
-                        <li><strong>Projectes</strong> ➔ Explicar i desenvolupar projectes personals que tinguin certa continuació o possible regularitat.</li>
+                        <li><strong>Projectes</strong> ➔ Explicar i desenvolupar projectes personals.</li>
                         <li><strong>Updates</strong> ➔ Explicar canvis principals de visió.</li>
-                        <li><strong>Actualitzacions</strong> ➔ Quines són aquelles eines que més aprecio i les seves especificacions.</li>
-                        <li><strong>Llibres</strong> ➔ Llibres que he llegit i m'han semblat rellevants.</li>
+                        <li><strong>Belongings</strong> ➔ Les eines que més aprecio.</li>
+                        <li><strong>Books</strong> ➔ Llibres rellevants.</li>
                       </ul>`,
         "belongings-content": `
-            <p>Selecciona una màquina per veure'n les entranyes:</p>
+            <p>Selecciona una categoria per veure'n els detalls:</p>
+            
+            <h4 style="color:var(--accent); margin-bottom:5px;">COMPUTING</h4>
             <ul class="pc-list">
-                <li><a href="#specs-rubius" class="pc-link">PC-Rubius-02 (2026-Present)</a></li>
-                <li><a href="#specs-darwin" class="pc-link"><s>PC-Darwin-01 (2020-2026)</s></a></li>
+                <li><a href="#table-rubius" class="pc-link">PC-Rubius-02 (2026-Present)</a></li>
+                <li><a href="#table-darwin" class="pc-link"><s>PC-Darwin-01 (2020-2026)</s></a></li>
             </ul>
 
-            <div style="height: 60vh;"></div> 
+            <h4 style="color:var(--accent); margin-bottom:5px; margin-top:20px;">KEYBOARDS & ARTISANS</h4>
+            <ul class="pc-list">
+                <li><a href="#table-keyboard-1" class="pc-link">Cycle 7 (Void Elf)</a></li>
+                <li><a href="#table-artisans" class="pc-link">Artisan Collection</a></li>
+            </ul>
 
-            <div id="specs-rubius" class="spec-box">
-                <h3 class="box-title">ESPECIFICACIONS: PC-RUBIUS-02</h3>
-                <ul>
-                    <li><strong>CPU:</strong> Ryzen 7 9700X</li>
-                    <li><strong>GPU:</strong> RX 9060 XT 16GB</li>
-                    <li><strong>Board:</strong> B850I AsRock</li>
-                    <li><strong>PSU:</strong> SF750 Corsair</li>
-                    <li><strong>RAM:</strong> Corsair Pro 2*16GB 6000Mhz CL48</li>
-                    <li><strong>Case:</strong> Fractal Terra Jade</li>
-                    <li><strong>Storage:</strong> SN850X 2Tb</li>
-                </ul>
-                <a href="#content" class="back-up">↑ Torna a la llista</a>
+            <div style="height: 10vh;"></div> 
+
+            <div id="table-rubius" class="hardware-table-container">
+                <h3 class="table-caption">PC-RUBIUS-02 SPECS</h3>
+                <table class="hardware-table">
+                    <thead><tr><th>Component</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td>CPU</td><td>Ryzen 7 9700X</td></tr>
+                        <tr><td>GPU</td><td>RX 9060 XT 16GB</td></tr>
+                        <tr><td>Motherboard</td><td>B850I AsRock</td></tr>
+                        <tr><td>PSU</td><td>SF750 Corsair</td></tr>
+                        <tr><td>RAM</td><td>Corsair Pro 2*16GB 6000Mhz CL48</td></tr>
+                        <tr><td>Case</td><td>Fractal Terra Jade</td></tr>
+                        <tr><td>Storage</td><td>SN850X 2Tb</td></tr>
+                    </tbody>
+                </table>
+                <a href="#content" class="back-up">↑ Tornar a l'inici</a>
             </div>
 
-            <div id="specs-darwin" class="spec-box old-pc">
-                <h3 class="box-title"><s>ESPECIFICACIONS: PC-DARWIN-01</s></h3>
-                <ul>
-                    <li><s><strong>CPU:</strong> Ryzen 7 2700X</s></li>
-                    <li><s><strong>GPU:</strong> RTX 2060 6GB</s></li>
-                    <li><s><strong>Board:</strong> B450 Aorus Elite V.2</s></li>
-                    <li><s><strong>PSU:</strong> Corsair TX650M</s></li>
-                    <li><s><strong>RAM:</strong> Team Group Delta 2*8GB 3200Mhz CL16</s></li>
-                    <li><s><strong>Case:</strong> MSI MPG Gungir 110R</s></li>
-                    <li><s><strong>Storage:</strong> 500GB SSD M.2</s></li>
-                </ul>
-                <a href="#content" class="back-up">↑ Torna a la llista</a>
+            <div style="height: 10vh;"></div>
+
+            <div id="table-darwin" class="hardware-table-container old-pc">
+                <h3 class="table-caption"><s>PC-DARWIN-01 SPECS (Retired)</s></h3>
+                <table class="hardware-table">
+                    <thead><tr><th>Component</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td><s>CPU</s></td><td><s>Ryzen 7 2700X</s></td></tr>
+                        <tr><td><s>GPU</s></td><td><s>RTX 2060 6GB</s></td></tr>
+                        <tr><td><s>Motherboard</s></td><td><s>B450 Aorus Elite V.2</s></td></tr>
+                        <tr><td><s>PSU</s></td><td><s>Corsair TX650M</s></td></tr>
+                        <tr><td><s>RAM</s></td><td><s>Team Group Delta 2*8GB 3200Mhz CL16</s></td></tr>
+                        <tr><td><s>Case</s></td><td><s>MSI MPG Gungir 110R</s></td></tr>
+                        <tr><td><s>Storage</s></td><td><s>500GB SSD M.2</s></td></tr>
+                    </tbody>
+                </table>
+                <a href="#content" class="back-up">↑ Tornar a l'inici</a>
+            </div>
+
+            <div style="height: 10vh;"></div>
+
+            <div id="table-keyboard-1" class="hardware-table-container">
+                <h3 class="table-caption">KEYBOARD: CYCLE 7</h3>
+                <table class="hardware-table">
+                    <thead><tr><th>Spec</th><th>Build Details</th></tr></thead>
+                    <tbody>
+                        <tr><td>Model</td><td>TKD Cycle 7 (70%)</td></tr>
+                        <tr><td>Theme</td><td>Void Elf</td></tr>
+                        <tr><td>Switches</td><td>(Per omplir...)</td></tr>
+                        <tr><td>Keycaps</td><td>(Per omplir...)</td></tr>
+                        <tr><td>Plate</td><td>(Per omplir...)</td></tr>
+                    </tbody>
+                </table>
+                <a href="#content" class="back-up">↑ Tornar a l'inici</a>
+            </div>
+
+            <div style="height: 10vh;"></div>
+
+            <div id="table-artisans" class="hardware-table-container">
+                <h3 class="table-caption">ARTISAN COLLECTION</h3>
+                <table class="hardware-table">
+                    <thead><tr><th>Maker / Sculpt</th><th>Colorway</th></tr></thead>
+                    <tbody>
+                        <tr><td>(Ex: Artkey)</td><td>(Ex: Sirius)</td></tr>
+                        <tr><td>(Ex: Hello Caps)</td><td>(Ex: Bongo Cat)</td></tr>
+                    </tbody>
+                </table>
+                <a href="#content" class="back-up">↑ Tornar a l'inici</a>
             </div>`
     },
     en: {
         "nav-home": "Home", "nav-journal": "Journal", "nav-projects": "Projects",
         "nav-updates": "Updates", "nav-belongings": "Belongings", "nav-books": "Books",
         "title-home": "Welcome",
-        "home-text": `Welcome to your journal where I will collect ideas, projects, and other things I find interesting.<br><br>
+        "home-text": `Welcome to my journal where I will collect ideas, projects, and other things I find interesting.<br><br>
                       The website is organized as follows:
                       <ul>
                         <li><strong>Journal</strong> ➔ Collection of loose ideas.</li>
-                        <li><strong>Projects</strong> ➔ Explaining and developing personal projects with a certain continuity or potential regularity.</li>
+                        <li><strong>Projects</strong> ➔ Explaining and developing personal projects.</li>
                         <li><strong>Updates</strong> ➔ Explaining major changes in vision.</li>
-                        <li><strong>Belongings</strong> ➔ The tools I value the most and their specifications.</li>
+                        <li><strong>Belongings</strong> ➔ The tools I value the most.</li>
                         <li><strong>Books</strong> ➔ Books I have read and found relevant.</li>
                       </ul>`,
         "belongings-content": `
-            <p>Selecciona una màquina per veure'n les entranyes:</p>
+            <p>Select a category to view details:</p>
+            
+            <h4 style="color:var(--accent); margin-bottom:5px;">COMPUTING</h4>
             <ul class="pc-list">
-                <li><a href="#specs-rubius" class="pc-link">PC-Rubius-02 (2026-Present)</a></li>
-                <li><a href="#specs-darwin" class="pc-link"><s>PC-Darwin-01 (2020-2026)</s></a></li>
+                <li><a href="#table-rubius" class="pc-link">PC-Rubius-02 (2026-Present)</a></li>
+                <li><a href="#table-darwin" class="pc-link"><s>PC-Darwin-01 (2020-2026)</s></a></li>
             </ul>
 
-            <div style="height: 60vh;"></div> 
+            <h4 style="color:var(--accent); margin-bottom:5px; margin-top:20px;">KEYBOARDS & ARTISANS</h4>
+            <ul class="pc-list">
+                <li><a href="#table-keyboard-1" class="pc-link">Cycle 7 (Void Elf)</a></li>
+                <li><a href="#table-artisans" class="pc-link">Artisan Collection</a></li>
+            </ul>
 
-            <div id="specs-rubius" class="spec-box">
-                <h3 class="box-title">ESPECIFICACIONS: PC-RUBIUS-02</h3>
-                <ul>
-                    <li><strong>CPU:</strong> Ryzen 7 9700X</li>
-                    <li><strong>GPU:</strong> RX 9060 XT 16GB</li>
-                    <li><strong>Board:</strong> B850I AsRock</li>
-                    <li><strong>PSU:</strong> SF750 Corsair</li>
-                    <li><strong>RAM:</strong> Corsair Pro 2*16GB 6000Mhz CL48</li>
-                    <li><strong>Case:</strong> Fractal Terra Jade</li>
-                    <li><strong>Storage:</strong> SN850X 2Tb</li>
-                </ul>
-                <a href="#content" class="back-up">↑ Torna a la llista</a>
+            <div style="height: 10vh;"></div> 
+
+            <div id="table-rubius" class="hardware-table-container">
+                <h3 class="table-caption">PC-RUBIUS-02 SPECS</h3>
+                <table class="hardware-table">
+                    <thead><tr><th>Component</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td>CPU</td><td>Ryzen 7 9700X</td></tr>
+                        <tr><td>GPU</td><td>RX 9060 XT 16GB</td></tr>
+                        <tr><td>Motherboard</td><td>B850I AsRock</td></tr>
+                        <tr><td>PSU</td><td>SF750 Corsair</td></tr>
+                        <tr><td>RAM</td><td>Corsair Pro 2*16GB 6000Mhz CL48</td></tr>
+                        <tr><td>Case</td><td>Fractal Terra Jade</td></tr>
+                        <tr><td>Storage</td><td>SN850X 2Tb</td></tr>
+                    </tbody>
+                </table>
+                <a href="#content" class="back-up">↑ Back to top</a>
             </div>
 
-            <div id="specs-darwin" class="spec-box old-pc">
-                <h3 class="box-title"><s>ESPECIFICACIONS: PC-DARWIN-01</s></h3>
-                <ul>
-                    <li><s><strong>CPU:</strong> Ryzen 7 2700X</s></li>
-                    <li><s><strong>GPU:</strong> RTX 2060 6GB</s></li>
-                    <li><s><strong>Board:</strong> B450 Aorus Elite V.2</s></li>
-                    <li><s><strong>PSU:</strong> Corsair TX650M</s></li>
-                    <li><s><strong>RAM:</strong> Team Group Delta 2*8GB 3200Mhz CL16</s></li>
-                    <li><s><strong>Case:</strong> MSI MPG Gungir 110R</s></li>
-                    <li><s><strong>Storage:</strong> 500GB SSD M.2</s></li>
-                </ul>
-                <a href="#content" class="back-up">↑ Torna a la llista</a>
+            <div style="height: 10vh;"></div>
+
+            <div id="table-darwin" class="hardware-table-container old-pc">
+                <h3 class="table-caption"><s>PC-DARWIN-01 SPECS (Retired)</s></h3>
+                <table class="hardware-table">
+                    <thead><tr><th>Component</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td><s>CPU</s></td><td><s>Ryzen 7 2700X</s></td></tr>
+                        <tr><td><s>GPU</s></td><td><s>RTX 2060 6GB</s></td></tr>
+                        <tr><td><s>Motherboard</s></td><td><s>B450 Aorus Elite V.2</s></td></tr>
+                        <tr><td><s>PSU</s></td><td><s>Corsair TX650M</s></td></tr>
+                        <tr><td><s>RAM</s></td><td><s>Team Group Delta 2*8GB 3200Mhz CL16</s></td></tr>
+                        <tr><td><s>Case</s></td><td><s>MSI MPG Gungir 110R</s></td></tr>
+                        <tr><td><s>Storage</s></td><td><s>500GB SSD M.2</s></td></tr>
+                    </tbody>
+                </table>
+                <a href="#content" class="back-up">↑ Back to top</a>
+            </div>
+
+             <div style="height: 10vh;"></div>
+
+            <div id="table-keyboard-1" class="hardware-table-container">
+                <h3 class="table-caption">KEYBOARD: CYCLE 7</h3>
+                <table class="hardware-table">
+                    <thead><tr><th>Spec</th><th>Build Details</th></tr></thead>
+                    <tbody>
+                        <tr><td>Model</td><td>TKD Cycle 7 (70%)</td></tr>
+                        <tr><td>Theme</td><td>Void Elf</td></tr>
+                        <tr><td>Switches</td><td>(TBD...)</td></tr>
+                        <tr><td>Keycaps</td><td>(TBD...)</td></tr>
+                        <tr><td>Plate</td><td>(TBD...)</td></tr>
+                    </tbody>
+                </table>
+                <a href="#content" class="back-up">↑ Back to top</a>
+            </div>
+
+            <div style="height: 10vh;"></div>
+
+            <div id="table-artisans" class="hardware-table-container">
+                <h3 class="table-caption">ARTISAN COLLECTION</h3>
+                <table class="hardware-table">
+                    <thead><tr><th>Maker / Sculpt</th><th>Colorway</th></tr></thead>
+                    <tbody>
+                        <tr><td>(Ex: Artkey)</td><td>(Ex: Sirius)</td></tr>
+                        <tr><td>(Ex: Hello Caps)</td><td>(Ex: Bongo Cat)</td></tr>
+                    </tbody>
+                </table>
+                <a href="#content" class="back-up">↑ Back to top</a>
             </div>`
     }
 };
@@ -125,7 +219,6 @@ function toggleLang() {
     document.querySelectorAll('[data-key]').forEach(el => {
         el.innerText = translations[currentLang][el.getAttribute('data-key')];
     });
-    // Detectamos en qué página estamos para refrescar el idioma del contenido
     const currentTitle = document.getElementById('page-title').innerText;
     if (currentTitle === "Benvinguts" || currentTitle === "Welcome") showPage('home');
     else if (currentTitle === "Belongings") showPage('belongings');
@@ -138,9 +231,6 @@ function toggleTheme() {
 }
 
 window.onload = () => showPage('home');
-
-
-
 
 
 
