@@ -34,13 +34,13 @@ const translations = {
                 <table class="hardware-table">
                     <thead><tr><th>Component</th><th>Details</th></tr></thead>
                     <tbody>
-                        <tr><td>CPU</td><td>Ryzen 7 9700X</td></tr>
-                        <tr><td>GPU</td><td>RX 9060 XT 16GB</td></tr>
-                        <tr><td>Motherboard</td><td>B850I AsRock</td></tr>
+                        <tr><td>CPU</td><td>Ryzen 7 9700X 3.8 GHz</td></tr>
+                        <tr><td>GPU</td><td>RX 9060 XT 16GB Gigabyte Gaming OC</td></tr>
+                        <tr><td>Motherboard</td><td>B850I AsRock Phantom Gaming</td></tr>
                         <tr><td>PSU</td><td>SF750 Corsair</td></tr>
                         <tr><td>RAM</td><td>Corsair Pro 2*16GB 6000Mhz CL48</td></tr>
                         <tr><td>Case</td><td>Fractal Terra Jade</td></tr>
-                        <tr><td>Storage</td><td>SN850X 2Tb</td></tr>
+                        <tr><td>Storage</td><td>WD_BLACK SN850X 2Tb</td></tr>
                     </tbody>
                 </table>
                 <a href="#content" class="back-up">↑ Tornar a l'inici</a>
@@ -53,13 +53,13 @@ const translations = {
                 <table class="hardware-table">
                     <thead><tr><th>Component</th><th>Details</th></tr></thead>
                     <tbody>
-                        <tr><td><s>CPU</s></td><td><s>Ryzen 7 2700X</s></td></tr>
-                        <tr><td><s>GPU</s></td><td><s>RTX 2060 6GB</s></td></tr>
+                        <tr><td><s>CPU</s></td><td><s>Ryzen 7 2700X 3.7 GHz</s></td></tr>
+                        <tr><td><s>GPU</s></td><td><s>RTX 2060 6GB Gigabyte Gaming OC</s></td></tr>
                         <tr><td><s>Motherboard</s></td><td><s>B450 Aorus Elite V.2</s></td></tr>
                         <tr><td><s>PSU</s></td><td><s>Corsair TX650M</s></td></tr>
                         <tr><td><s>RAM</s></td><td><s>Team Group Delta 2*8GB 3200Mhz CL16</s></td></tr>
                         <tr><td><s>Case</s></td><td><s>MSI MPG Gungir 110R</s></td></tr>
-                        <tr><td><s>Storage</s></td><td><s>500GB SSD M.2</s></td></tr>
+                        <tr><td><s>Storage</s></td><td><s>Kioxia Exceria 500GB SSD M.2</s></td></tr>
                     </tbody>
                 </table>
                 <a href="#content" class="back-up">↑ Tornar a l'inici</a>
@@ -68,15 +68,14 @@ const translations = {
             <div style="height: 10vh;"></div>
 
             <div id="table-keyboard-1" class="hardware-table-container">
-                <h3 class="table-caption">KEYBOARD: CYCLE 7</h3>
+                <h3 class="table-caption">Teclat: CYCLE 7</h3>
                 <table class="hardware-table">
                     <thead><tr><th>Spec</th><th>Build Details</th></tr></thead>
                     <tbody>
                         <tr><td>Model</td><td>TKD Cycle 7 (70%)</td></tr>
-                        <tr><td>Theme</td><td>Void Elf</td></tr>
-                        <tr><td>Switches</td><td>(Per omplir...)</td></tr>
-                        <tr><td>Keycaps</td><td>(Per omplir...)</td></tr>
-                        <tr><td>Plate</td><td>(Per omplir...)</td></tr>
+                        <tr><td>Tecles</td><td>GMK Blot</td></tr>
+                        <tr><td>Switches</td><td>Vertex V1</td></tr>
+                        <tr><td>Placa</td><td>Alumini</td></tr>
                     </tbody>
                 </table>
                 <a href="#content" class="back-up">↑ Tornar a l'inici</a>
@@ -85,7 +84,7 @@ const translations = {
             <div style="height: 10vh;"></div>
 
             <div id="table-artisans" class="hardware-table-container">
-                <h3 class="table-caption">ARTISAN COLLECTION</h3>
+                <h3 class="table-caption">Col·lecció d'artisans</h3>
                 <table class="hardware-table">
                     <thead><tr><th>Maker / Sculpt</th><th>Colorway</th></tr></thead>
                     <tbody>
@@ -131,13 +130,13 @@ const translations = {
                 <table class="hardware-table">
                     <thead><tr><th>Component</th><th>Details</th></tr></thead>
                     <tbody>
-                        <tr><td>CPU</td><td>Ryzen 7 9700X</td></tr>
-                        <tr><td>GPU</td><td>RX 9060 XT 16GB</td></tr>
-                        <tr><td>Motherboard</td><td>B850I AsRock</td></tr>
+                        <tr><td>CPU</td><td>Ryzen 7 9700X 3.8 GHz</td></tr>
+                        <tr><td>GPU</td><td>RX 9060 XT 16GB Gigabyte Gaming OC</td></tr>
+                        <tr><td>Motherboard</td><td>B850I AsRock Phantom Gaming</td></tr>
                         <tr><td>PSU</td><td>SF750 Corsair</td></tr>
                         <tr><td>RAM</td><td>Corsair Pro 2*16GB 6000Mhz CL48</td></tr>
                         <tr><td>Case</td><td>Fractal Terra Jade</td></tr>
-                        <tr><td>Storage</td><td>SN850X 2Tb</td></tr>
+                        <tr><td>Storage</td><td>WD_BLACK SN850X 2Tb</td></tr>
                     </tbody>
                 </table>
                 <a href="#content" class="back-up">↑ Back to top</a>
@@ -150,13 +149,13 @@ const translations = {
                 <table class="hardware-table">
                     <thead><tr><th>Component</th><th>Details</th></tr></thead>
                     <tbody>
-                        <tr><td><s>CPU</s></td><td><s>Ryzen 7 2700X</s></td></tr>
-                        <tr><td><s>GPU</s></td><td><s>RTX 2060 6GB</s></td></tr>
+                        <tr><td><s>CPU</s></td><td><s>Ryzen 7 2700X 3.7 GHz</s></td></tr>
+                        <tr><td><s>GPU</s></td><td><s>RTX 2060 6GB Gigabyte Gaming OC</s></td></tr>
                         <tr><td><s>Motherboard</s></td><td><s>B450 Aorus Elite V.2</s></td></tr>
                         <tr><td><s>PSU</s></td><td><s>Corsair TX650M</s></td></tr>
                         <tr><td><s>RAM</s></td><td><s>Team Group Delta 2*8GB 3200Mhz CL16</s></td></tr>
                         <tr><td><s>Case</s></td><td><s>MSI MPG Gungir 110R</s></td></tr>
-                        <tr><td><s>Storage</s></td><td><s>500GB SSD M.2</s></td></tr>
+                        <tr><td><s>Storage</s></td><td><s>Kioxia Exceria 500GB SSD M.2</s></td></tr>
                     </tbody>
                 </table>
                 <a href="#content" class="back-up">↑ Back to top</a>
@@ -169,11 +168,10 @@ const translations = {
                 <table class="hardware-table">
                     <thead><tr><th>Spec</th><th>Build Details</th></tr></thead>
                     <tbody>
-                        <tr><td>Model</td><td>TKD Cycle 7 (70%)</td></tr>
-                        <tr><td>Theme</td><td>Void Elf</td></tr>
-                        <tr><td>Switches</td><td>(TBD...)</td></tr>
-                        <tr><td>Keycaps</td><td>(TBD...)</td></tr>
-                        <tr><td>Plate</td><td>(TBD...)</td></tr>
+                        <tr><td>Model</td><td>TKD Cycle 7 Void Elf</td></tr>
+                        <tr><td>Keycaps</td><td>GMK Blot</td></tr>
+                        <tr><td>Switches</td><td>Vertex V1</td></tr>
+                        <tr><td>Plate</td><td>Aluminium</td></tr>
                     </tbody>
                 </table>
                 <a href="#content" class="back-up">↑ Back to top</a>
@@ -231,6 +229,7 @@ function toggleTheme() {
 }
 
 window.onload = () => showPage('home');
+
 
 
 
