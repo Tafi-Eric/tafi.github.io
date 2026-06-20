@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Metal+Mania&family=Pirata+One&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#211d1f; --bg2:#2b2427; --surface:#322a2e; --surface2:#3b3236;
+    --line:rgba(236,229,226,.14); --line2:rgba(236,229,226,.26);
+    --text:#f8f4f1; --muted:#d2c8c3; --faint:#a2948f;
+    --accent:#c01f3a; --accent-bright:#e8455f; --accent-deep:#7d1126; --accent-dim:rgba(192,31,58,.16);
+    --shadow:0 28px 60px -28px rgba(0,0,0,.72);
+    --display:'Cinzel', serif;
+  }
+  html[data-theme="light"]{
+    --bg:#f1ebe4; --bg2:#e8dfd6; --surface:#f8f2ec; --surface2:#efe5dc;
+    --line:rgba(28,20,22,.12); --line2:rgba(28,20,22,.22);
+    --text:#1d1517; --muted:#6c5b56; --faint:#9a8a84;
+    --accent:#9c1228; --accent-bright:#c01f3a; --accent-deep:#6e0c1c; --accent-dim:rgba(156,18,40,.12);
+    --shadow:0 28px 50px -30px rgba(60,20,25,.4);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  ::selection{background:var(--accent);color:#fff;}
+  ::-webkit-scrollbar{width:11px;height:11px;}
+  ::-webkit-scrollbar-thumb{background:var(--accent-deep);}
+  ::-webkit-scrollbar-track{background:var(--bg2);}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  @keyframes emberRise{0%{transform:translateY(0) scale(1);opacity:0}12%{opacity:.7}100%{transform:translateY(-160px) scale(.3);opacity:0}}
+  @keyframes glowPulse{0%,100%{opacity:.45}50%{opacity:.85}}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="position:relative;min-height:100vh;background:var(--bg);color:var(--text);overflow-x:hidden;">
+
+  <div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px 520px at 82% -8%, var(--accent-dim), transparent 62%), radial-gradient(720px 620px at -5% 105%, var(--accent-dim), transparent 60%);"></div>
+
+  <sc-if value="{{ showEmbers }}" hint-placeholder-val="{{ false }}">
+    <div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;">
+      <span style="position:absolute;left:6%;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 6px var(--accent);animation:emberRise 7s linear infinite;animation-delay:0s"></span>
+      <span style="position:absolute;left:14%;bottom:-10px;width:2px;height:2px;border-radius:50%;background:var(--accent);animation:emberRise 9s linear infinite;animation-delay:1.4s"></span>
+      <span style="position:absolute;left:22%;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 6px var(--accent);animation:emberRise 8s linear infinite;animation-delay:3s"></span>
+      <span style="position:absolute;left:31%;bottom:-10px;width:2px;height:2px;border-radius:50%;background:var(--accent);animation:emberRise 10s linear infinite;animation-delay:.6s"></span>
+      <span style="position:absolute;left:39%;bottom:-10px;width:4px;height:4px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 8px var(--accent);animation:emberRise 6.5s linear infinite;animation-delay:2.2s"></span>
+      <span style="position:absolute;left:47%;bottom:-10px;width:2px;height:2px;border-radius:50%;background:var(--accent);animation:emberRise 9.5s linear infinite;animation-delay:4s"></span>
+      <span style="position:absolute;left:55%;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 6px var(--accent);animation:emberRise 8.5s linear infinite;animation-delay:1s"></span>
+      <span style="position:absolute;left:63%;bottom:-10px;width:2px;height:2px;border-radius:50%;background:var(--accent);animation:emberRise 11s linear infinite;animation-delay:2.8s"></span>
+      <span style="position:absolute;left:71%;bottom:-10px;width:4px;height:4px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 8px var(--accent);animation:emberRise 7.2s linear infinite;animation-delay:.3s"></span>
+      <span style="position:absolute;left:79%;bottom:-10px;width:2px;height:2px;border-radius:50%;background:var(--accent);animation:emberRise 9.8s linear infinite;animation-delay:3.6s"></span>
+      <span style="position:absolute;left:87%;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 6px var(--accent);animation:emberRise 8.2s linear infinite;animation-delay:1.8s"></span>
+      <span style="position:absolute;left:94%;bottom:-10px;width:2px;height:2px;border-radius:50%;background:var(--accent);animation:emberRise 10.5s linear infinite;animation-delay:.9s"></span>
+    </div>
+  </sc-if>
+
+  <header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:20px;padding:16px 40px;background:color-mix(in srgb, var(--bg) 80%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);">
+    <div onClick="{{ goHome }}" style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+      <img src="assets/mascot.png" alt="Tafi" style="width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 0 7px var(--accent-dim));"/>
+      <div style="line-height:1;">
+        <div style="font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:4px;color:var(--text);">TAFI</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--faint);margin-top:3px;">{{ t.brandTag }}</div>
+      </div>
+    </div>
+
+    <nav style="margin-left:auto;display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end;">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
+        <button onClick="{{ item.onClick }}" style="background:none;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 11px;color:{{ item.color }};position:relative;transition:color .25s;" style-hover="color:var(--accent-bright)">
+          {{ item.label }}
+          <sc-if value="{{ item.active }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:11px;right:11px;bottom:1px;height:2px;background:var(--accent);"></span></sc-if>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button onClick="{{ onToggleFun }}" aria-label="?" title="?" style="background:transparent;border:none;color:{{ funColor }};opacity:.55;width:28px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s;" style-hover="opacity:1;color:var(--accent-bright);transform:scale(1.15);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 3.5 4.2 5.2 4.2 9.3a4.2 4.2 0 0 1-8.4 0c0-1.4.5-2.4 1.1-3.2-.1 1.6 1 2.2 1 2.2-.6-2.4 1-4.3 1.1-6 .2 1.6 1.6 2.6 2.2 3.8.3-2.7-1.1-4.5-1.2-6.1z"></path></svg>
+      </button>
+      <button onClick="{{ onToggleTheme }}" aria-label="theme" style="background:transparent;border:1px solid var(--line2);color:var(--muted);width:36px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:2px;transition:.2s;" style-hover="border-color:var(--accent);color:var(--accent);">
+        <sc-if value="{{ themeIsDark }}" hint-placeholder-val="{{ true }}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        </sc-if>
+        <sc-if value="{{ themeIsLight }}" hint-placeholder-val="{{ false }}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        </sc-if>
+      </button>
+      <button onClick="{{ onToggleLang }}" style="background:transparent;border:1px solid var(--line2);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;padding:8px 12px;cursor:pointer;border-radius:2px;transition:.2s;" style-hover="border-color:var(--accent);color:var(--accent);">{{ langOther }}</button>
+    </div>
+  </header>
+
+  <main ref="{{ mainRef }}" style="position:relative;z-index:1;">
+
+    <!-- ============ HOME ============ -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <section style="padding:34px 40px 16px;max-width:1180px;margin:0 auto;">
+        <div style="display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;">
+          <div>
+            <div data-reveal="1" style="animation:rise .6s ease both;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">{{ t.kicker }}</div>
+            <h1 data-reveal="1" style="animation:rise .6s ease both;font-family:var(--display);font-weight:700;font-size:clamp(38px,5.2vw,62px);line-height:1.04;margin:13px 0 0;letter-spacing:1px;">{{ t.headA }}<br/><span style="color:var(--accent);">{{ t.headB }}</span></h1>
+            <p data-reveal="1" style="animation:rise .6s ease both;font-family:'EB Garamond',serif;font-size:19px;line-height:1.55;color:var(--muted);max-width:47ch;margin:14px 0 0;">{{ t.lede }}</p>
+            <div data-reveal="1" style="animation:rise .6s ease both;display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+              <button onClick="{{ enterJournal }}" style="background:var(--accent);color:#fff;border:1px solid var(--accent);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:14px 22px;cursor:pointer;border-radius:2px;transition:.2s;" style-hover="background:var(--accent-bright);box-shadow:0 0 26px var(--accent-dim);">{{ t.enter }} &#9656;</button>
+              <button onClick="{{ enterBelongings }}" style="background:transparent;color:var(--text);border:1px solid var(--line2);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:14px 22px;cursor:pointer;border-radius:2px;transition:.2s;" style-hover="border-color:var(--accent);color:var(--accent);">{{ t.enter2 }}</button>
+            </div>
+            <div data-reveal="1" style="animation:rise .6s ease both;margin-top:22px;max-width:450px;border:1px solid var(--line2);background:color-mix(in srgb, var(--surface) 82%, transparent);border-radius:5px;overflow:hidden;box-shadow:var(--shadow);">
+              <div style="display:flex;gap:7px;align-items:center;padding:10px 13px;border-bottom:1px solid var(--line);background:var(--bg2);">
+                <span style="width:9px;height:9px;border-radius:50%;background:var(--accent);"></span>
+                <span style="width:9px;height:9px;border-radius:50%;background:var(--faint);"></span>
+                <span style="width:9px;height:9px;border-radius:50%;background:var(--faint);"></span>
+                <span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);letter-spacing:1px;">tafi@cat: ~</span>
+              </div>
+              <div style="padding:15px 17px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.95;">
+                <sc-for list="{{ t.term }}" as="ln" hint-placeholder-count="4">
+                  <div><span style="color:var(--accent);">{{ ln.s }}</span> <span style="color:var(--muted);">{{ ln.t }}</span></div>
+                </sc-for>
+                <div><span style="color:var(--accent);">$</span> <span style="display:inline-block;width:8px;height:15px;background:var(--accent);vertical-align:middle;animation:blink 1.1s step-end infinite;"></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:center;align-items:center;position:relative;min-height:300px;">
+            <div aria-hidden="true" style="position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle, var(--accent-dim), transparent 66%);filter:blur(8px);animation:glowPulse 5.5s ease-in-out infinite;"></div>
+            <img src="assets/mascot.png" alt="The horned king of Tafi" style="position:relative;width:min(430px,86%);object-fit:contain;filter:drop-shadow(0 26px 42px rgba(0,0,0,.55));animation:floaty 7.5s ease-in-out infinite;"/>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding:4px 40px 84px;max-width:1180px;margin:0 auto;">
+        <div data-reveal="1" style="animation:rise .6s ease both;display:flex;align-items:center;gap:18px;margin-bottom:22px;">
+          <h2 style="font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:4px;text-transform:uppercase;color:var(--faint);margin:0;">{{ t.indexTitle }}</h2>
+          <div style="flex:1;height:1px;background:var(--line);"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;">
+          <sc-for list="{{ cards }}" as="c" hint-placeholder-count="5">
+            <button data-reveal="1" onClick="{{ c.onClick }}" style="animation:rise .6s ease both;transition:border-color .25s, background .25s;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:15px 15px 16px;cursor:pointer;" style-hover="border-color:var(--accent);background:var(--surface2);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                <span style="font-family:var(--display);font-weight:600;font-size:18px;line-height:1.1;color:var(--text);">{{ c.label }}</span>
+                <span style="color:var(--accent);font-family:'IBM Plex Mono',monospace;">&#8599;</span>
+              </div>
+              <p style="font-family:'EB Garamond',serif;font-size:13.5px;color:var(--muted);margin:7px 0 0;line-height:1.45;">{{ c.d }}</p>
+            </button>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ JOURNAL ============ -->
+    <sc-if value="{{ isJournal }}" hint-placeholder-val="{{ false }}">
+      <section style="padding:56px 40px 92px;max-width:980px;margin:0 auto;">
+        <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">~/diari</div>
+          <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,52px);margin:10px 0 0;letter-spacing:1px;">{{ t.journalTitle }}</h2>
+          <p style="font-family:'EB Garamond',serif;font-size:19px;color:var(--muted);margin:12px 0 0;max-width:54ch;">{{ t.journalLead }}</p>
+          <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
+        </div>
+        <sc-for list="{{ t.entries }}" as="e" hint-placeholder-count="3">
+          <article data-reveal="1" style="animation:rise .6s ease both;display:grid;grid-template-columns:150px 1fr;gap:26px;padding:28px 0;border-top:1px solid var(--line);cursor:pointer;" style-hover="">
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);letter-spacing:1px;">{{ e.date }}</div>
+              <div style="display:inline-block;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 8px;border-radius:2px;">{{ e.tag }}</div>
+            </div>
+            <div>
+              <h3 style="font-family:var(--display);font-weight:600;font-size:27px;margin:0;color:var(--text);">{{ e.t }}</h3>
+              <p style="font-family:'EB Garamond',serif;font-size:18px;line-height:1.6;color:var(--muted);margin:10px 0 0;max-width:60ch;">{{ e.x }}</p>
+              <span style="display:inline-block;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);">{{ t.readMore }} &#9656;</span>
+            </div>
+          </article>
+        </sc-for>
+      </section>
+    </sc-if>
+
+    <!-- ============ PROJECTS ============ -->
+    <sc-if value="{{ isProjects }}" hint-placeholder-val="{{ false }}">
+      <section style="padding:56px 40px 92px;max-width:980px;margin:0 auto;">
+        <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:34px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">~/projectes</div>
+          <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,52px);margin:10px 0 0;letter-spacing:1px;">{{ t.projectsTitle }}</h2>
+          <p style="font-family:'EB Garamond',serif;font-size:19px;color:var(--muted);margin:12px 0 0;max-width:54ch;">{{ t.projectsLead }}</p>
+          <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+          <sc-for list="{{ t.projects }}" as="p" hint-placeholder-count="3">
+            <div data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:24px;" style-hover="border-color:var(--accent);">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+                <span style="font-family:var(--display);font-weight:600;font-size:25px;color:var(--text);">{{ p.t }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:4px 9px;border-radius:2px;white-space:nowrap;">{{ p.s }}</span>
+              </div>
+              <p style="font-family:'EB Garamond',serif;font-size:17px;line-height:1.55;color:var(--muted);margin:12px 0 0;">{{ p.d }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ UPDATES ============ -->
+    <sc-if value="{{ isUpdates }}" hint-placeholder-val="{{ false }}">
+      <section style="padding:56px 40px 92px;max-width:860px;margin:0 auto;">
+        <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:24px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">~/updates</div>
+          <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,52px);margin:10px 0 0;letter-spacing:1px;">{{ t.updatesTitle }}</h2>
+          <p style="font-family:'EB Garamond',serif;font-size:19px;color:var(--muted);margin:12px 0 0;max-width:54ch;">{{ t.updatesLead }}</p>
+          <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
+        </div>
+        <sc-for list="{{ t.updates }}" as="u" hint-placeholder-count="3">
+          <div data-reveal="1" style="animation:rise .6s ease both;display:grid;grid-template-columns:96px 1fr;gap:22px;padding:24px 0;border-top:1px solid var(--line);align-items:baseline;">
+            <div>
+              <div style="font-family:var(--display);font-weight:700;font-size:24px;color:var(--accent);">{{ u.v }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:1px;margin-top:4px;">{{ u.date }}</div>
+            </div>
+            <p style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.55;color:var(--text);margin:0;">{{ u.d }}</p>
+          </div>
+        </sc-for>
+      </section>
+    </sc-if>
+
+    <!-- ============ BELONGINGS ============ -->
+    <sc-if value="{{ isBelongings }}" hint-placeholder-val="{{ false }}">
+      <section style="padding:56px 40px 92px;max-width:980px;margin:0 auto;">
+        <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:10px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">~/pertinences</div>
+          <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,52px);margin:10px 0 0;letter-spacing:1px;">{{ t.belongingsTitle }}</h2>
+          <p style="font-family:'EB Garamond',serif;font-size:19px;color:var(--muted);margin:12px 0 0;max-width:54ch;">{{ t.belongingsLead }}</p>
+          <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
+        </div>
+
+        <div data-reveal="1" style="animation:rise .6s ease both;display:flex;align-items:center;gap:14px;margin:44px 0 18px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">{{ t.computing }}</span>
+          <div style="flex:1;height:1px;background:var(--line);"></div>
+        </div>
+
+        <div data-reveal="1" style="animation:rise .6s ease both;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--bg2);">
+            <div><div style="font-family:var(--display);font-weight:600;font-size:22px;color:var(--text);">{{ t.pcRubiusName }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:1px;margin-top:3px;">{{ t.pcRubiusYears }}</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:5px 10px;border-radius:2px;">{{ t.active }}</span>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:13px;">
+            <sc-for list="{{ t.pcRubiusRows }}" as="r" hint-placeholder-count="7">
+              <tr style="border-top:1px solid var(--line);"><td style="padding:11px 18px;color:var(--faint);width:34%;text-transform:uppercase;letter-spacing:1px;font-size:11px;">{{ r.k }}</td><td style="padding:11px 18px;color:var(--text);">{{ r.v }}</td></tr>
+            </sc-for>
+          </table>
+        </div>
+
+        <div data-reveal="1" style="animation:rise .6s ease both;transition:filter .5s;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);margin-bottom:20px;filter:grayscale(.75);" style-hover="filter:grayscale(0);">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--bg2);">
+            <div><div style="font-family:var(--display);font-weight:600;font-size:22px;color:var(--muted);">{{ t.pcDarwinName }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:1px;margin-top:3px;">{{ t.pcDarwinYears }}</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);border:1px solid var(--line2);padding:5px 10px;border-radius:2px;">{{ t.retired }}</span>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:13px;">
+            <sc-for list="{{ t.pcDarwinRows }}" as="r" hint-placeholder-count="7">
+              <tr style="border-top:1px solid var(--line);"><td style="padding:11px 18px;color:var(--faint);width:34%;text-transform:uppercase;letter-spacing:1px;font-size:11px;">{{ r.k }}</td><td style="padding:11px 18px;color:var(--muted);">{{ r.v }}</td></tr>
+            </sc-for>
+          </table>
+        </div>
+
+        <div data-reveal="1" style="animation:rise .6s ease both;display:flex;align-items:center;gap:14px;margin:44px 0 18px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">{{ t.peripherals }}</span>
+          <div style="flex:1;height:1px;background:var(--line);"></div>
+        </div>
+
+        <div data-reveal="1" style="animation:rise .6s ease both;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);margin-bottom:20px;max-width:560px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--bg2);">
+            <div><div style="font-family:var(--display);font-weight:600;font-size:22px;color:var(--text);">{{ t.keyboardName }}</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:1px;margin-top:3px;">{{ t.keyboardSub }}</div></div>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:13px;">
+            <sc-for list="{{ t.keyboardRows }}" as="r" hint-placeholder-count="4">
+              <tr style="border-top:1px solid var(--line);"><td style="padding:11px 18px;color:var(--faint);width:34%;text-transform:uppercase;letter-spacing:1px;font-size:11px;">{{ r.k }}</td><td style="padding:11px 18px;color:var(--text);">{{ r.v }}</td></tr>
+            </sc-for>
+          </table>
+        </div>
+
+        <div data-reveal="1" style="animation:rise .6s ease both;display:flex;align-items:center;gap:14px;margin:44px 0 8px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">{{ t.artisans }}</span>
+          <div style="flex:1;height:1px;background:var(--line);"></div>
+        </div>
+        <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:20px;">
+          <div style="font-family:var(--display);font-weight:600;font-size:26px;color:var(--text);">{{ t.dragonsTitle }}</div>
+          <p style="font-family:'EB Garamond',serif;font-size:17px;color:var(--muted);margin:6px 0 0;">{{ t.dragonsLead }}</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:18px;">
+          <figure data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;margin:0;width:240px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);" style-hover="border-color:var(--accent);transform:translateY(-4px);">
+            <div style="width:240px;height:216px;background:url('assets/dragons.jpg') -11px -93px / 769px auto no-repeat;"></div>
+            <figcaption style="padding:13px 14px;font-family:var(--display);font-size:17px;color:var(--text);text-align:center;border-top:1px solid var(--line);">Slain Rottermelon</figcaption>
+          </figure>
+          <figure data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;margin:0;width:240px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);" style-hover="border-color:var(--accent);transform:translateY(-4px);">
+            <div style="width:240px;height:216px;background:url('assets/dragons.jpg') -264px -93px / 769px auto no-repeat;"></div>
+            <figcaption style="padding:13px 14px;font-family:var(--display);font-size:17px;color:var(--text);text-align:center;border-top:1px solid var(--line);">Slain Shenronington</figcaption>
+          </figure>
+          <figure data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;margin:0;width:240px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);" style-hover="border-color:var(--accent);transform:translateY(-4px);">
+            <div style="width:240px;height:216px;background:url('assets/dragons.jpg') -519px -93px / 769px auto no-repeat;"></div>
+            <figcaption style="padding:13px 14px;font-family:var(--display);font-size:17px;color:var(--text);text-align:center;border-top:1px solid var(--line);">Slain Black Skull</figcaption>
+          </figure>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ BOOKS ============ -->
+    <sc-if value="{{ isBooks }}" hint-placeholder-val="{{ false }}">
+      <section style="padding:56px 40px 92px;max-width:980px;margin:0 auto;">
+        <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:34px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">~/llibres</div>
+          <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,52px);margin:10px 0 0;letter-spacing:1px;">{{ t.booksTitle }}</h2>
+          <p style="font-family:'EB Garamond',serif;font-size:19px;color:var(--muted);margin:12px 0 0;max-width:54ch;">{{ t.booksLead }}</p>
+          <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;">
+          <sc-for list="{{ t.books }}" as="b" hint-placeholder-count="4">
+            <div data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:20px;display:flex;flex-direction:column;gap:12px;min-height:172px;" style-hover="border-color:var(--accent);">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);">{{ b.cat }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--faint);">{{ b.st }}</span>
+              </div>
+              <div style="font-family:var(--display);font-size:34px;color:var(--faint);line-height:1;">{{ b.t }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);margin-top:auto;">{{ b.a }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <footer style="border-top:1px solid var(--line);padding:30px 40px;max-width:1180px;margin:30px auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <div style="display:flex;gap:11px;align-items:center;">
+        <img src="assets/mascot.png" alt="" style="width:24px;height:24px;object-fit:contain;"/>
+        <span style="font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:3px;color:var(--text);">TAFI</span>
+      </div>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:1px;">&#169; 2026 &middot; {{ t.footer }}</span>
+    </footer>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:880},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#a51d2d&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;animLevel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;subtle&quot;,&quot;standard&quot;,&quot;dramatic&quot;],&quot;default&quot;:&quot;standard&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ca&quot;,&quot;en&quot;],&quot;default&quot;:&quot;ca&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    let theme = "dark";
+    let lang = (this.props && this.props.startLang) || "ca";
+    let fun = false;
+    try {
+      const t = localStorage.getItem("tafi-theme"); if (t) theme = t;
+      const l = localStorage.getItem("tafi-lang"); if (l) lang = l;
+      const f = localStorage.getItem("tafi-fun"); if (f) fun = f === "1";
+    } catch(e){}
+    this.state = { theme: theme, lang: lang, section: "home", personality: fun };
+    this.rootRef = (el) => { this.rootEl = el; };
+    this.mainRef = (el) => { this.mainEl = el; };
+  }
+
+  componentDidMount(){ this.applySide(); }
+  componentDidUpdate(prev){
+    this.applySide();
+    if (prev.section !== this.state.section && this.mainEl){
+      try { this.mainEl.scrollTop = 0; window.scrollTo(0,0); } catch(e){}
+    }
+  }
+
+  applySide(){
+    const root = document.documentElement;
+    root.setAttribute("data-theme", this.state.theme);
+    root.setAttribute("data-anim", (this.props && this.props.animLevel) || "standard");
+    root.setAttribute("data-fun", this.state.personality ? "1" : "0");
+    root.style.setProperty("--display", this.state.personality ? "'Metal Mania', cursive" : "'Cinzel', serif");
+    const acc = this.props && this.props.accent;
+    if (acc){ root.style.setProperty("--accent", acc); }
+    try {
+      localStorage.setItem("tafi-theme", this.state.theme);
+      localStorage.setItem("tafi-lang", this.state.lang);
+      localStorage.setItem("tafi-fun", this.state.personality ? "1" : "0");
+    } catch(e){}
+  }
+
+  go(section){ this.setState({ section: section }); }
+  toggleTheme(){ this.setState((s) => ({ theme: s.theme === "dark" ? "light" : "dark" })); }
+  toggleLang(){ this.setState((s) => ({ lang: s.lang === "ca" ? "en" : "ca" })); }
+  toggleFun(){ this.setState((s) => ({ personality: !s.personality })); }
+
+  data(){
+    return {
+      ca: {
+        brandTag: "diari",
+        kicker: "Diari personal \u00b7 tafi.cat",
+        headA: "Passió, motivació,",
+        headB: "i sang calenta.",
+        lede: "Un racó sobre tecnologia, finances i les eines que estimo. Aquí hi deso el que penso, el que construeixo i el que col\u00b7lecciono.",
+        term: [ {s:"$",t:"whoami"}, {s:"\u203a",t:"tafi — tecnologia & finances"}, {s:"$",t:"ls ~/"}, {s:"\u203a",t:"diari/  projectes/  pertinences/  llibres/"} ],
+        enter: "Comença a llegir",
+        enter2: "Veure pertinences",
+        indexTitle: "Què hi trobaràs",
+        readMore: "Llegir",
+        nav: { home:"Inici", journal:"Diari", projects:"Projectes", updates:"Actualitzacions", belongings:"Pertinences", books:"Llibres" },
+        cardDesc: { journal:"Recull d'idees soltes, en brut.", projects:"Projectes personals, explicats.", updates:"Canvis de rumb i de visió.", belongings:"Les eines que més aprecio.", books:"Lectures que deixen marca." },
+        journalTitle: "Diari",
+        journalLead: "Idees soltes, abans no s'escapin.",
+        entries: [
+          { date:"2026 \u00b7 06 \u00b7 12", tag:"Finances", t:"Sobre el risc que no es veu", x:"El risc real poques vegades surt als gràfics. Notes sobre cues, liquiditat i paciència." },
+          { date:"2026 \u00b7 05 \u00b7 28", tag:"Tecnologia", t:"Per què encara munto a mà", x:"Cada peça triada a consciència. El plaer de construir el que faràs servir cada dia." },
+          { date:"2026 \u00b7 05 \u00b7 09", tag:"Notes", t:"Apostes petites, partides llargues", x:"Sobre compondre en silenci i deixar que el temps faci la feina pesada." }
+        ],
+        projectsTitle: "Projectes",
+        projectsLead: "Coses que construeixo, en veu alta.",
+        projects: [
+          { t:"Ledger-09", d:"Eina personal per seguir cartera i despeses sense fulls de càlcul.", s:"En curs" },
+          { t:"Forja", d:"Banc de proves per a teclats, switches i firmware.", s:"Actiu" },
+          { t:"Atlas", d:"Notes connectades sobre macroeconomia i cicles.", s:"Llavor" }
+        ],
+        updatesTitle: "Actualitzacions",
+        updatesLead: "Canvis de rumb i de visió.",
+        updates: [
+          { v:"v3.0", date:"2026 \u00b7 06", d:"Redisseny complet. Mode fosc per defecte i bilingüe (CA/EN)." },
+          { v:"v2.0", date:"2025 \u00b7 11", d:"Migració a domini propi: tafi.cat." },
+          { v:"v1.0", date:"2024 \u00b7 03", d:"Primer diari públic. La llavor de tot això." }
+        ],
+        belongingsTitle: "Pertinences",
+        belongingsLead: "Les eines que més aprecio, i per què.",
+        computing: "Computació", peripherals: "Perifèrics", artisans: "Artisans",
+        active: "Actiu", retired: "Retirat",
+        pcRubiusName: "PC-Rubius-02", pcRubiusYears: "2026 — present",
+        pcDarwinName: "PC-Darwin-01", pcDarwinYears: "2020 — 2026",
+        keyboardName: "TKD Cycle 7", keyboardSub: "70% \u00b7 Void Elf",
+        pcRubiusRows: [
+          {k:"CPU",v:"Ryzen 7 9700X \u00b7 3.8 GHz"}, {k:"GPU",v:"RX 9060 XT 16GB \u00b7 Gigabyte Gaming OC"},
+          {k:"Placa base",v:"B850I AsRock Phantom Gaming"}, {k:"Font",v:"SF750 Corsair"},
+          {k:"RAM",v:"Corsair Pro 2×16GB \u00b7 6000 MHz CL48"}, {k:"Caixa",v:"Fractal Terra Jade"},
+          {k:"Disc",v:"WD_BLACK SN850X \u00b7 2 TB"}
+        ],
+        pcDarwinRows: [
+          {k:"CPU",v:"Ryzen 7 2700X \u00b7 3.7 GHz"}, {k:"GPU",v:"RTX 2060 6GB \u00b7 Gigabyte Gaming OC"},
+          {k:"Placa base",v:"B450 Aorus Elite V.2"}, {k:"Font",v:"Corsair TX650M"},
+          {k:"RAM",v:"Team Group Delta 2×8GB \u00b7 3200 MHz CL16"}, {k:"Caixa",v:"MSI MPG Gungnir 110R"},
+          {k:"Disc",v:"Kioxia Exceria 500GB SSD M.2"}
+        ],
+        keyboardRows: [ {k:"Model",v:"TKD Cycle 7 (70%)"}, {k:"Keycaps",v:"GMK Blot"}, {k:"Switches",v:"Vertex V1"}, {k:"Placa",v:"Alumini"} ],
+        dragonsTitle: "Els meus dracs",
+        dragonsLead: "Keycaps esculpits a mà. Cada drac, un caigut.",
+        booksTitle: "Llibres",
+        booksLead: "Lectures que deixen marca. La biblioteca s'omplirà aviat.",
+        books: [
+          { cat:"Finances", t:"—", a:"Per afegir", st:"Llegint" },
+          { cat:"Filosofia", t:"—", a:"Per afegir", st:"A la llista" },
+          { cat:"Tècnic", t:"—", a:"Per afegir", st:"Llegit" },
+          { cat:"Ficció", t:"—", a:"Per afegir", st:"A la llista" }
+        ],
+        footer: "Fet amb intenció \u00b7 tafi.cat"
+      },
+      en: {
+        brandTag: "journal",
+        kicker: "Personal journal \u00b7 tafi.cat",
+        headA: "Passion, motivation,",
+        headB: "& hot blood.",
+        lede: "A corner for technology, finance, and the tools I cherish. Here I keep what I think, what I build, and what I collect.",
+        term: [ {s:"$",t:"whoami"}, {s:"\u203a",t:"tafi — technology & finance"}, {s:"$",t:"ls ~/"}, {s:"\u203a",t:"journal/  projects/  belongings/  books/"} ],
+        enter: "Start reading",
+        enter2: "See belongings",
+        indexTitle: "What you'll find",
+        readMore: "Read",
+        nav: { home:"Home", journal:"Journal", projects:"Projects", updates:"Updates", belongings:"Belongings", books:"Books" },
+        cardDesc: { journal:"Loose ideas, raw.", projects:"Personal projects, explained.", updates:"Shifts in course and vision.", belongings:"The tools I value most.", books:"Reads that leave a mark." },
+        journalTitle: "Journal",
+        journalLead: "Loose ideas, before they slip away.",
+        entries: [
+          { date:"2026 \u00b7 06 \u00b7 12", tag:"Finance", t:"On the risk you can't see", x:"Real risk rarely shows on the charts. Notes on tails, liquidity, and patience." },
+          { date:"2026 \u00b7 05 \u00b7 28", tag:"Tech", t:"Why I still build by hand", x:"Every part chosen on purpose. The joy of building the thing you'll use every day." },
+          { date:"2026 \u00b7 05 \u00b7 09", tag:"Notes", t:"Small bets, long games", x:"On compounding quietly and letting time do the heavy lifting." }
+        ],
+        projectsTitle: "Projects",
+        projectsLead: "Things I build, out loud.",
+        projects: [
+          { t:"Ledger-09", d:"A personal tool to track portfolio and spending without spreadsheets.", s:"In progress" },
+          { t:"Forja", d:"A test bench for keyboards, switches, and firmware.", s:"Active" },
+          { t:"Atlas", d:"Connected notes on macroeconomics and cycles.", s:"Seed" }
+        ],
+        updatesTitle: "Updates",
+        updatesLead: "Shifts in course and vision.",
+        updates: [
+          { v:"v3.0", date:"2026 \u00b7 06", d:"Full redesign. Dark by default and bilingual (CA/EN)." },
+          { v:"v2.0", date:"2025 \u00b7 11", d:"Moved to my own domain: tafi.cat." },
+          { v:"v1.0", date:"2024 \u00b7 03", d:"First public journal. The seed of all this." }
+        ],
+        belongingsTitle: "Belongings",
+        belongingsLead: "The tools I value most, and why.",
+        computing: "Computing", peripherals: "Peripherals", artisans: "Artisans",
+        active: "Active", retired: "Retired",
+        pcRubiusName: "PC-Rubius-02", pcRubiusYears: "2026 — present",
+        pcDarwinName: "PC-Darwin-01", pcDarwinYears: "2020 — 2026",
+        keyboardName: "TKD Cycle 7", keyboardSub: "70% \u00b7 Void Elf",
+        pcRubiusRows: [
+          {k:"CPU",v:"Ryzen 7 9700X \u00b7 3.8 GHz"}, {k:"GPU",v:"RX 9060 XT 16GB \u00b7 Gigabyte Gaming OC"},
+          {k:"Motherboard",v:"B850I AsRock Phantom Gaming"}, {k:"PSU",v:"SF750 Corsair"},
+          {k:"RAM",v:"Corsair Pro 2×16GB \u00b7 6000 MHz CL48"}, {k:"Case",v:"Fractal Terra Jade"},
+          {k:"Storage",v:"WD_BLACK SN850X \u00b7 2 TB"}
+        ],
+        pcDarwinRows: [
+          {k:"CPU",v:"Ryzen 7 2700X \u00b7 3.7 GHz"}, {k:"GPU",v:"RTX 2060 6GB \u00b7 Gigabyte Gaming OC"},
+          {k:"Motherboard",v:"B450 Aorus Elite V.2"}, {k:"PSU",v:"Corsair TX650M"},
+          {k:"RAM",v:"Team Group Delta 2×8GB \u00b7 3200 MHz CL16"}, {k:"Case",v:"MSI MPG Gungnir 110R"},
+          {k:"Storage",v:"Kioxia Exceria 500GB SSD M.2"}
+        ],
+        keyboardRows: [ {k:"Model",v:"TKD Cycle 7 (70%)"}, {k:"Keycaps",v:"GMK Blot"}, {k:"Switches",v:"Vertex V1"}, {k:"Plate",v:"Aluminium"} ],
+        dragonsTitle: "My dragons",
+        dragonsLead: "Hand-sculpted keycaps. Each dragon, a fallen one.",
+        booksTitle: "Books",
+        booksLead: "Reads that leave a mark. The library fills soon.",
+        books: [
+          { cat:"Finance", t:"—", a:"To add", st:"Reading" },
+          { cat:"Philosophy", t:"—", a:"To add", st:"Queued" },
+          { cat:"Technical", t:"—", a:"To add", st:"Read" },
+          { cat:"Fiction", t:"—", a:"To add", st:"Queued" }
+        ],
+        footer: "Made with intent \u00b7 tafi.cat"
+      }
+    };
+  }
+
+  renderVals(){
+    const t = this.data()[this.state.lang];
+    const sec = this.state.section;
+    const order = ["home","journal","projects","updates","belongings","books"];
+    const nav = order.map((id) => ({
+      id: id, label: t.nav[id], active: id === sec,
+      color: id === sec ? "var(--accent-bright)" : "var(--muted)",
+      onClick: () => this.go(id)
+    }));
+    const cards = ["journal","projects","updates","belongings","books"].map((id) => ({
+      label: t.nav[id], d: t.cardDesc[id], onClick: () => this.go(id)
+    }));
+    return {
+      t: t,
+      nav: nav,
+      cards: cards,
+      rootRef: this.rootRef,
+      mainRef: this.mainRef,
+      goHome: () => this.go("home"),
+      enterJournal: () => this.go("journal"),
+      enterBelongings: () => this.go("belongings"),
+      onToggleTheme: () => this.toggleTheme(),
+      onToggleLang: () => this.toggleLang(),
+      onToggleFun: () => this.toggleFun(),
+      funOn: this.state.personality,
+      funColor: this.state.personality ? "var(--accent-bright)" : "var(--faint)",
+      showEmbers: this.state.personality || (((this.props && this.props.animLevel) || "standard") === "dramatic"),
+      langOther: this.state.lang === "ca" ? "EN" : "CA",
+      themeIsDark: this.state.theme === "dark",
+      themeIsLight: this.state.theme === "light",
+      isDramatic: ((this.props && this.props.animLevel) || "standard") === "dramatic",
+      isHome: sec === "home",
+      isJournal: sec === "journal",
+      isProjects: sec === "projects",
+      isUpdates: sec === "updates",
+      isBelongings: sec === "belongings",
+      isBooks: sec === "books"
+    };
+  }
+}
+</script>
+</body>
+</html>
