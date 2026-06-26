@@ -49,6 +49,8 @@
     [data-term]{font-size:12px!important;}
   }
 </style>
+<script src="taficrypto.js"></script>
+<script src="secrets.js"></script>
 </helmet>
 
 <div ref="{{ rootRef }}" style="position:relative;min-height:100vh;background:var(--bg);color:var(--text);overflow-x:hidden;">
@@ -152,7 +154,7 @@
           <sc-for list="{{ cards }}" as="c" hint-placeholder-count="5">
             <button data-reveal="1" onClick="{{ c.onClick }}" style="animation:rise .6s ease both;transition:border-color .25s, background .25s;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:15px 15px 16px;cursor:pointer;" style-hover="border-color:var(--accent);background:var(--surface2);">
               <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                <span style="font-family:var(--display);font-weight:600;font-size:clamp(15px,3.6vw,18px);line-height:1.12;color:var(--text);flex:1;min-width:0;overflow-wrap:break-word;">{{ c.label }}</span>
+                <span style="font-family:var(--display);font-weight:600;font-size:clamp(13px,3.3vw,18px);line-height:1.12;letter-spacing:-0.2px;color:var(--text);flex:1;min-width:0;overflow-wrap:break-word;">{{ c.label }}</span>
                 <span style="color:var(--accent);font-family:'IBM Plex Mono',monospace;">&#8599;</span>
               </div>
               <p style="font-family:'EB Garamond',serif;font-size:13.5px;color:var(--muted);margin:7px 0 0;line-height:1.45;">{{ c.d }}</p>
@@ -184,6 +186,30 @@
             </div>
           </article>
         </sc-for>
+        <sc-for list="{{ lockedEntries }}" as="e" hint-placeholder-count="1">
+          <article style="display:grid;grid-template-columns:clamp(90px,22vw,150px) 1fr;gap:clamp(14px,4vw,26px);padding:26px 0;border-top:1px solid var(--line);">
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);letter-spacing:1px;">{{ e.date }}</div>
+              <div style="display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 8px;border-radius:2px;"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm3 8H9V6a3 3 0 0 1 6 0Z"></path></svg>{{ t.lockChip }}</div>
+            </div>
+            <div>
+              <sc-if value="{{ e.unlocked }}" hint-placeholder-val="{{ false }}">
+                <h3 style="font-family:var(--display);font-weight:600;font-size:27px;margin:0;color:var(--text);">{{ e.t }}</h3>
+                <p style="font-family:'EB Garamond',serif;font-size:18px;line-height:1.6;color:var(--muted);margin:10px 0 0;max-width:60ch;">{{ e.x }}</p>
+                <button onClick="{{ e.onRelock }}" style="background:transparent;color:var(--faint);border:1px solid var(--line2);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;cursor:pointer;border-radius:3px;margin-top:14px;" style-hover="border-color:var(--accent);color:var(--accent);">{{ t.relock }}</button>
+              </sc-if>
+              <sc-if value="{{ e.locked }}" hint-placeholder-val="{{ true }}">
+                <h3 style="font-family:var(--display);font-weight:600;font-size:24px;margin:0;color:var(--muted);">{{ t.lockEntry }}</h3>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center;">
+                  <input type="password" value="{{ e.pw }}" onChange="{{ e.onPw }}" onKeyDown="{{ e.onKey }}" placeholder="{{ t.lockPrompt }}" style="width:190px;max-width:62vw;background:var(--bg2);border:1px solid var(--line2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:10px 12px;border-radius:3px;outline:none;"/>
+                  <button onClick="{{ e.onSubmit }}" style="background:var(--accent);color:#fff;border:1px solid var(--accent);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;cursor:pointer;border-radius:3px;" style-hover="background:var(--accent-bright);">{{ t.lockBtn }}</button>
+                </div>
+                <sc-if value="{{ e.err }}" hint-placeholder-val="{{ false }}"><div style="color:var(--accent-bright);font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:8px;">{{ t.lockErr }}</div></sc-if>
+                <div style="color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:8px;letter-spacing:.5px;">{{ t.lockHint }}</div>
+              </sc-if>
+            </div>
+          </article>
+        </sc-for>
       </section>
     </sc-if>
 
@@ -204,6 +230,30 @@
                 <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:4px 9px;border-radius:2px;white-space:nowrap;">{{ p.s }}</span>
               </div>
               <p style="font-family:'EB Garamond',serif;font-size:17px;line-height:1.55;color:var(--muted);margin:12px 0 0;">{{ p.d }}</p>
+            </div>
+          </sc-for>
+          <sc-for list="{{ lockedProjects }}" as="p" hint-placeholder-count="1">
+            <div style="border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:24px;">
+              <sc-if value="{{ p.unlocked }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+                  <span style="font-family:var(--display);font-weight:600;font-size:25px;color:var(--text);">{{ p.t }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:4px 9px;border-radius:2px;white-space:nowrap;">{{ p.s }}</span>
+                </div>
+                <p style="font-family:'EB Garamond',serif;font-size:17px;line-height:1.55;color:var(--muted);margin:12px 0 0;">{{ p.d }}</p>
+                <button onClick="{{ p.onRelock }}" style="background:transparent;color:var(--faint);border:1px solid var(--line2);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;cursor:pointer;border-radius:3px;margin-top:14px;" style-hover="border-color:var(--accent);color:var(--accent);">{{ t.relock }}</button>
+              </sc-if>
+              <sc-if value="{{ p.locked }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm3 8H9V6a3 3 0 0 1 6 0Z"></path></svg>
+                  <span style="font-family:var(--display);font-weight:600;font-size:22px;color:var(--muted);">{{ t.lockProject }}</span>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center;">
+                  <input type="password" value="{{ p.pw }}" onChange="{{ p.onPw }}" onKeyDown="{{ p.onKey }}" placeholder="{{ t.lockPrompt }}" style="flex:1;min-width:120px;background:var(--bg2);border:1px solid var(--line2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:10px 12px;border-radius:3px;outline:none;"/>
+                  <button onClick="{{ p.onSubmit }}" style="background:var(--accent);color:#fff;border:1px solid var(--accent);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:11px 16px;cursor:pointer;border-radius:3px;" style-hover="background:var(--accent-bright);">{{ t.lockBtn }}</button>
+                </div>
+                <sc-if value="{{ p.err }}" hint-placeholder-val="{{ false }}"><div style="color:var(--accent-bright);font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:8px;">{{ t.lockErr }}</div></sc-if>
+                <div style="color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:8px;letter-spacing:.5px;">{{ t.lockHint }}</div>
+              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -331,6 +381,29 @@
               <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);margin-top:auto;">{{ b.a }}</div>
             </div>
           </sc-for>
+          <sc-for list="{{ lockedBooks }}" as="b" hint-placeholder-count="1">
+            <div style="border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:20px;display:flex;flex-direction:column;gap:10px;min-height:172px;">
+              <sc-if value="{{ b.unlocked }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);">&#9733; {{ t.lockBook }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--faint);">{{ b.st }}</span>
+                </div>
+                <div style="font-family:var(--display);font-size:23px;color:var(--text);line-height:1.12;">{{ b.t }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);margin-top:auto;">{{ b.a }}</div>
+                <button onClick="{{ b.onRelock }}" style="background:transparent;color:var(--faint);border:1px solid var(--line2);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;cursor:pointer;border-radius:3px;align-self:flex-start;" style-hover="border-color:var(--accent);color:var(--accent);">{{ t.relock }}</button>
+              </sc-if>
+              <sc-if value="{{ b.locked }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;align-items:center;gap:7px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm3 8H9V6a3 3 0 0 1 6 0Z"></path></svg>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);">&#9733; {{ t.lockBook }}</span>
+                </div>
+                <div style="font-family:var(--display);font-size:30px;color:var(--faint);line-height:1;">&#10022;</div>
+                <input type="password" value="{{ b.pw }}" onChange="{{ b.onPw }}" onKeyDown="{{ b.onKey }}" placeholder="{{ t.lockPrompt }}" style="width:100%;background:var(--bg2);border:1px solid var(--line2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:9px 11px;border-radius:3px;outline:none;margin-top:auto;"/>
+                <button onClick="{{ b.onSubmit }}" style="background:var(--accent);color:#fff;border:1px solid var(--accent);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 12px;cursor:pointer;border-radius:3px;" style-hover="background:var(--accent-bright);">{{ t.lockBtn }}</button>
+                <sc-if value="{{ b.err }}" hint-placeholder-val="{{ false }}"><div style="color:var(--accent-bright);font-family:'IBM Plex Mono',monospace;font-size:11px;">{{ t.lockErr }}</div></sc-if>
+              </sc-if>
+            </div>
+          </sc-for>
         </div>
       </section>
     </sc-if>
@@ -358,12 +431,53 @@ class Component extends DCLogic {
       const l = localStorage.getItem("tafi-lang"); if (l) lang = l;
       const f = localStorage.getItem("tafi-fun"); if (f) fun = f === "1";
     } catch(e){}
-    this.state = { theme: theme, lang: lang, section: "home", personality: fun };
+    this.state = { theme: theme, lang: lang, section: "home", personality: fun, pwInput: {}, unlocked: {}, lockErr: {}, busy: {} };
+    this._keys = [];
+    try { const rk = localStorage.getItem("tafi-keys"); if (rk) this._keys = JSON.parse(atob(rk)) || []; } catch(e){}
     this.rootRef = (el) => { this.rootEl = el; };
     this.mainRef = (el) => { this.mainEl = el; };
   }
 
-  componentDidMount(){ this.applySide(); }
+  componentDidMount(){ this.applySide(); this.autoUnlock(); }
+
+  secrets(){ return window.TAFI_SECRETS || { entries: [], projects: [], books: [] }; }
+  allLocked(){ const s = this.secrets(); return [].concat(s.entries || [], s.projects || [], s.books || []); }
+  saveKeys(){ try { localStorage.setItem("tafi-keys", btoa(JSON.stringify(this._keys))); } catch(e){} }
+  autoUnlock(retry){
+    if (!window.TafiCrypto || !window.TafiCrypto.supported){ if ((retry || 0) < 40) setTimeout(() => this.autoUnlock((retry || 0) + 1), 150); return; }
+    const keys = this._keys || []; if (!keys.length) return;
+    this.allLocked().forEach((it) => {
+      if (this.state.unlocked[it.id]) return;
+      (async () => { for (const k of keys){ try { const txt = await window.TafiCrypto.unlock(it.blob, k); if (txt){ const obj = JSON.parse(txt); this.setState((st) => ({ unlocked: Object.assign({}, st.unlocked, { [it.id]: obj }) })); break; } } catch(e){} } })();
+    });
+  }
+  setPw(id, val){ this.setState((st) => ({ pwInput: Object.assign({}, st.pwInput, { [id]: val }), lockErr: Object.assign({}, st.lockErr, { [id]: false }) })); }
+  async submitUnlock(id, blob){
+    const pwd = (this.state.pwInput[id] || "").trim(); if (!pwd) return;
+    if (!window.TafiCrypto || !window.TafiCrypto.supported){ this.setState((st) => ({ lockErr: Object.assign({}, st.lockErr, { [id]: true }) })); return; }
+    this.setState((st) => ({ busy: Object.assign({}, st.busy, { [id]: true }) }));
+    let obj = null; try { const txt = await window.TafiCrypto.unlock(blob, pwd); if (txt) obj = JSON.parse(txt); } catch(e){}
+    if (obj){ if (this._keys.indexOf(pwd) === -1){ this._keys.push(pwd); this.saveKeys(); } this.setState((st) => ({ unlocked: Object.assign({}, st.unlocked, { [id]: obj }), busy: Object.assign({}, st.busy, { [id]: false }), pwInput: Object.assign({}, st.pwInput, { [id]: "" }) })); }
+    else { this.setState((st) => ({ lockErr: Object.assign({}, st.lockErr, { [id]: true }), busy: Object.assign({}, st.busy, { [id]: false }) })); }
+  }
+  relock(id){ this.setState((st) => { const u = Object.assign({}, st.unlocked); delete u[id]; return { unlocked: u }; }); }
+  buildViews(list){
+    const lang = this.state.lang;
+    return (list || []).map((it) => {
+      const obj = this.state.unlocked[it.id];
+      const c = obj ? (obj[lang] || obj.ca || obj.en || {}) : null;
+      const blob = it.blob;
+      return {
+        id: it.id, date: it.date || "", unlocked: !!obj, locked: !obj,
+        t: c ? (c.t || "") : "", x: c ? (c.x || "") : "", d: c ? (c.d || "") : "", s: c ? (c.s || "") : "", a: c ? (c.a || "") : "", st: c ? (c.st || "") : "",
+        pw: this.state.pwInput[it.id] || "", err: !!this.state.lockErr[it.id], busy: !!this.state.busy[it.id],
+        onPw: (e) => this.setPw(it.id, e.target.value),
+        onKey: (e) => { if (e.key === "Enter") this.submitUnlock(it.id, blob); },
+        onSubmit: () => this.submitUnlock(it.id, blob),
+        onRelock: () => this.relock(it.id)
+      };
+    });
+  }
   componentDidUpdate(prev){
     this.applySide();
     if (prev.section !== this.state.section && this.mainEl){
@@ -457,7 +571,9 @@ class Component extends DCLogic {
           { cat:"Tècnic", t:"—", a:"Per afegir", st:"Llegit" },
           { cat:"Ficció", t:"—", a:"Per afegir", st:"A la llista" }
         ],
-        footer: "Fet amb intenció \u00b7 tafi.cat"
+        footer: "Fet amb intenció \u00b7 tafi.cat",
+        lockChip: "Xifrat", lockEntry: "Entrada xifrada", lockProject: "Projecte privat", lockBook: "Llibre estrella",
+        lockPrompt: "Contrasenya", lockBtn: "Desbloqueja", lockErr: "Contrasenya incorrecta", lockHint: "S'obre amb la teva clau o la mestra", relock: "Amaga"
       },
       en: {
         brandTag: "journal",
@@ -523,7 +639,9 @@ class Component extends DCLogic {
           { cat:"Technical", t:"—", a:"To add", st:"Read" },
           { cat:"Fiction", t:"—", a:"To add", st:"Queued" }
         ],
-        footer: "Made with intent \u00b7 tafi.cat"
+        footer: "Made with intent \u00b7 tafi.cat",
+        lockChip: "Encrypted", lockEntry: "Encrypted entry", lockProject: "Private project", lockBook: "Star book",
+        lockPrompt: "Password", lockBtn: "Unlock", lockErr: "Wrong password", lockHint: "Opens with your key or the master", relock: "Hide"
       }
     };
   }
@@ -564,7 +682,10 @@ class Component extends DCLogic {
       isProjects: sec === "projects",
       isUpdates: sec === "updates",
       isBelongings: sec === "belongings",
-      isBooks: sec === "books"
+      isBooks: sec === "books",
+      lockedEntries: this.buildViews((this.secrets().entries) || []),
+      lockedProjects: this.buildViews((this.secrets().projects) || []),
+      lockedBooks: this.buildViews((this.secrets().books) || [])
     };
   }
 }
