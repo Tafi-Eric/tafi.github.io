@@ -104,7 +104,32 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
         </sc-if>
       </button>
-      <button onClick="{{ onToggleLang }}" style="background:transparent;border:1px solid var(--line2);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;padding:8px 12px;cursor:pointer;border-radius:2px;transition:.2s;" style-hover="border-color:var(--accent);color:var(--accent);">{{ langOther }}</button>
+      <button onClick="{{ onToggleLang }}" aria-label="{{ langOther }}" title="{{ langOther }}" style="background:transparent;border:1px solid var(--line2);color:var(--muted);padding:6px 8px;height:34px;display:flex;align-items:center;cursor:pointer;border-radius:2px;transition:.2s;" style-hover="border-color:var(--accent);">
+        <sc-if value="{{ showUK }}" hint-placeholder-val="{{ true }}">
+          <svg width="23" height="16" viewBox="0 0 60 40" style="display:block;border-radius:2px;">
+            <defs><clipPath id="ukclip"><rect width="60" height="40" rx="3"></rect></clipPath></defs>
+            <g clip-path="url(#ukclip)">
+              <rect width="60" height="40" fill="#012169"></rect>
+              <path d="M0,0 60,40 M60,0 0,40" stroke="#fff" stroke-width="8"></path>
+              <path d="M0,0 60,40 M60,0 0,40" stroke="#C8102E" stroke-width="4"></path>
+              <path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="13"></path>
+              <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="8"></path>
+            </g>
+          </svg>
+        </sc-if>
+        <sc-if value="{{ showCAT }}" hint-placeholder-val="{{ false }}">
+          <svg width="23" height="16" viewBox="0 0 60 40" style="display:block;border-radius:2px;">
+            <defs><clipPath id="catclip"><rect width="60" height="40" rx="3"></rect></clipPath></defs>
+            <g clip-path="url(#catclip)">
+              <rect width="60" height="40" fill="#FCDD09"></rect>
+              <rect y="4.44" width="60" height="4.44" fill="#DA121A"></rect>
+              <rect y="13.33" width="60" height="4.44" fill="#DA121A"></rect>
+              <rect y="22.22" width="60" height="4.44" fill="#DA121A"></rect>
+              <rect y="31.11" width="60" height="4.44" fill="#DA121A"></rect>
+            </g>
+          </svg>
+        </sc-if>
+      </button>
     </div>
   </header>
 
@@ -167,14 +192,15 @@
     <!-- ============ JOURNAL ============ -->
     <sc-if value="{{ isJournal }}" hint-placeholder-val="{{ false }}">
       <section style="padding:56px clamp(18px,5vw,40px) 92px;max-width:980px;margin:0 auto;">
+        <sc-if value="{{ journalIsList }}" hint-placeholder-val="{{ true }}">
         <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:14px;">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">~/diari</div>
           <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,52px);margin:10px 0 0;letter-spacing:1px;">{{ t.journalTitle }}</h2>
           <p style="font-family:'EB Garamond',serif;font-size:19px;color:var(--muted);margin:12px 0 0;max-width:54ch;">{{ t.journalLead }}</p>
           <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
         </div>
-        <sc-for list="{{ t.entries }}" as="e" hint-placeholder-count="3">
-          <article data-reveal="1" style="animation:rise .6s ease both;display:grid;grid-template-columns:clamp(90px,22vw,150px) 1fr;gap:clamp(14px,4vw,26px);padding:26px 0;border-top:1px solid var(--line);cursor:pointer;" style-hover="">
+        <sc-for list="{{ journalList }}" as="e" hint-placeholder-count="3">
+          <article data-reveal="1" onClick="{{ e.onOpen }}" style="animation:rise .6s ease both;display:grid;grid-template-columns:clamp(90px,22vw,150px) 1fr;gap:clamp(14px,4vw,26px);padding:26px 0;border-top:1px solid var(--line);cursor:pointer;transition:border-color .2s;" style-hover="border-color:var(--accent);">
             <div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);letter-spacing:1px;">{{ e.date }}</div>
               <div style="display:inline-block;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 8px;border-radius:2px;">{{ e.tag }}</div>
@@ -210,12 +236,26 @@
             </div>
           </article>
         </sc-for>
+        </sc-if>
+        <sc-if value="{{ journalIsDetail }}" hint-placeholder-val="{{ false }}">
+          <article data-reveal="1" style="animation:rise .6s ease both;max-width:680px;">
+            <button onClick="{{ goBack }}" style="background:transparent;color:var(--accent);border:none;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:0;cursor:pointer;margin-bottom:24px;" style-hover="color:var(--accent-bright);">&#8592; {{ t.back }}</button>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);letter-spacing:1px;">{{ journalDetail.date }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:3px 8px;border-radius:2px;">{{ journalDetail.tag }}</span>
+            </div>
+            <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,46px);margin:14px 0 0;letter-spacing:.5px;line-height:1.1;">{{ journalDetail.t }}</h1>
+            <div style="height:2px;width:54px;background:var(--accent);margin:22px 0;"></div>
+            <p style="font-family:'EB Garamond',serif;font-size:20px;line-height:1.7;color:var(--text);margin:0;">{{ journalDetail.x }}</p>
+          </article>
+        </sc-if>
       </section>
     </sc-if>
 
     <!-- ============ PROJECTS ============ -->
     <sc-if value="{{ isProjects }}" hint-placeholder-val="{{ false }}">
       <section style="padding:56px clamp(18px,5vw,40px) 92px;max-width:980px;margin:0 auto;">
+        <sc-if value="{{ projectsIsList }}" hint-placeholder-val="{{ true }}">
         <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:34px;">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">~/projectes</div>
           <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,52px);margin:10px 0 0;letter-spacing:1px;">{{ t.projectsTitle }}</h2>
@@ -223,8 +263,8 @@
           <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
-          <sc-for list="{{ t.projects }}" as="p" hint-placeholder-count="3">
-            <div data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:24px;" style-hover="border-color:var(--accent);">
+          <sc-for list="{{ projectsList }}" as="p" hint-placeholder-count="3">
+            <div data-reveal="1" onClick="{{ p.onOpen }}" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:24px;cursor:pointer;" style-hover="border-color:var(--accent);">
               <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
                 <span style="font-family:var(--display);font-weight:600;font-size:25px;color:var(--text);">{{ p.t }}</span>
                 <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:4px 9px;border-radius:2px;white-space:nowrap;">{{ p.s }}</span>
@@ -257,6 +297,18 @@
             </div>
           </sc-for>
         </div>
+        </sc-if>
+        <sc-if value="{{ projectsIsDetail }}" hint-placeholder-val="{{ false }}">
+          <div data-reveal="1" style="animation:rise .6s ease both;max-width:680px;">
+            <button onClick="{{ goBack }}" style="background:transparent;color:var(--accent);border:none;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:0;cursor:pointer;margin-bottom:24px;" style-hover="color:var(--accent-bright);">&#8592; {{ t.back }}</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+              <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,44px);margin:0;letter-spacing:.5px;">{{ projectDetail.t }}</h1>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:5px 11px;border-radius:2px;white-space:nowrap;">{{ projectDetail.s }}</span>
+            </div>
+            <div style="height:2px;width:54px;background:var(--accent);margin:22px 0;"></div>
+            <p style="font-family:'EB Garamond',serif;font-size:20px;line-height:1.7;color:var(--text);margin:0;">{{ projectDetail.d }}</p>
+          </div>
+        </sc-if>
       </section>
     </sc-if>
 
@@ -364,6 +416,7 @@
     <!-- ============ BOOKS ============ -->
     <sc-if value="{{ isBooks }}" hint-placeholder-val="{{ false }}">
       <section style="padding:56px clamp(18px,5vw,40px) 92px;max-width:980px;margin:0 auto;">
+        <sc-if value="{{ booksIsList }}" hint-placeholder-val="{{ true }}">
         <div data-reveal="1" style="animation:rise .6s ease both;margin-bottom:34px;">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);">~/llibres</div>
           <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,52px);margin:10px 0 0;letter-spacing:1px;">{{ t.booksTitle }}</h2>
@@ -371,8 +424,8 @@
           <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;">
-          <sc-for list="{{ t.books }}" as="b" hint-placeholder-count="4">
-            <div data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:20px;display:flex;flex-direction:column;gap:12px;min-height:172px;" style-hover="border-color:var(--accent);">
+          <sc-for list="{{ booksList }}" as="b" hint-placeholder-count="4">
+            <div data-reveal="1" onClick="{{ b.onOpen }}" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;border:1px solid var(--line);background:var(--surface);border-radius:5px;padding:20px;display:flex;flex-direction:column;gap:12px;min-height:172px;cursor:pointer;" style-hover="border-color:var(--accent);">
               <div style="display:flex;justify-content:space-between;align-items:center;">
                 <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);">{{ b.cat }}</span>
                 <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--faint);">{{ b.st }}</span>
@@ -405,6 +458,19 @@
             </div>
           </sc-for>
         </div>
+        </sc-if>
+        <sc-if value="{{ booksIsDetail }}" hint-placeholder-val="{{ false }}">
+          <div data-reveal="1" style="animation:rise .6s ease both;max-width:680px;">
+            <button onClick="{{ goBack }}" style="background:transparent;color:var(--accent);border:none;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:0;cursor:pointer;margin-bottom:24px;" style-hover="color:var(--accent-bright);">&#8592; {{ t.back }}</button>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);">{{ bookDetail.cat }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--faint);">{{ bookDetail.st }}</span>
+            </div>
+            <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,46px);margin:14px 0 0;letter-spacing:.5px;line-height:1.1;">{{ bookDetail.t }}</h1>
+            <div style="height:2px;width:54px;background:var(--accent);margin:22px 0;"></div>
+            <p style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.6;color:var(--muted);margin:0;">{{ bookDetail.a }}</p>
+          </div>
+        </sc-if>
       </section>
     </sc-if>
 
@@ -431,14 +497,24 @@ class Component extends DCLogic {
       const l = localStorage.getItem("tafi-lang"); if (l) lang = l;
       const f = localStorage.getItem("tafi-fun"); if (f) fun = f === "1";
     } catch(e){}
-    this.state = { theme: theme, lang: lang, section: "home", personality: fun, pwInput: {}, unlocked: {}, lockErr: {}, busy: {} };
+    let section = "home", routeItem = null;
+    try { const parts = (location.hash || "").replace(/^#/, "").split("/"); const r = { "": "home", "home": "home", "journal": "journal", "projects": "projects", "updates": "updates", "belongings": "belongings", "books": "books" }; if (r[parts[0]] != null) section = r[parts[0]]; if (parts[1]) routeItem = decodeURIComponent(parts[1]); } catch(e){}
+    this.state = { theme: theme, lang: lang, section: section, item: routeItem, personality: fun, pwInput: {}, unlocked: {}, lockErr: {}, busy: {} };
     this._keys = [];
     try { const rk = localStorage.getItem("tafi-keys"); if (rk) this._keys = JSON.parse(atob(rk)) || []; } catch(e){}
     this.rootRef = (el) => { this.rootEl = el; };
     this.mainRef = (el) => { this.mainEl = el; };
   }
 
-  componentDidMount(){ this.applySide(); this.autoUnlock(); }
+  componentDidMount(){ this.applySide(); this.autoUnlock(); this._onHash = () => this.syncHash(); window.addEventListener("hashchange", this._onHash); }
+  componentWillUnmount(){ if (this._onHash) window.removeEventListener("hashchange", this._onHash); }
+  syncHash(){
+    const r = { "": "home", "home": "home", "journal": "journal", "projects": "projects", "updates": "updates", "belongings": "belongings", "books": "books" };
+    const parts = (location.hash || "").replace(/^#/, "").split("/");
+    const section = (r[parts[0]] != null) ? r[parts[0]] : "home";
+    const item = parts[1] ? decodeURIComponent(parts[1]) : null;
+    this.setState((s) => (s.section === section && s.item === item) ? null : { section: section, item: item });
+  }
 
   secrets(){ return window.TAFI_SECRETS || { entries: [], projects: [], books: [] }; }
   allLocked(){ const s = this.secrets(); return [].concat(s.entries || [], s.projects || [], s.books || []); }
@@ -480,7 +556,7 @@ class Component extends DCLogic {
   }
   componentDidUpdate(prev){
     this.applySide();
-    if (prev.section !== this.state.section && this.mainEl){
+    if ((prev.section !== this.state.section || prev.item !== this.state.item) && this.mainEl){
       try { this.mainEl.scrollTop = 0; window.scrollTo(0,0); } catch(e){}
     }
   }
@@ -500,7 +576,17 @@ class Component extends DCLogic {
     } catch(e){}
   }
 
-  go(section){ this.setState({ section: section }); }
+  go(section){ this.route(section, null); }
+  open(section, item){ this.route(section, item); }
+  route(section, item){
+    const map = { home: "home", journal: "journal", projects: "projects", updates: "updates", belongings: "belongings", books: "books" };
+    let h = map[section] || "home";
+    if (item) h += "/" + item;
+    try {
+      if (location.hash !== "#" + h) { location.hash = h; }
+      else { this.setState({ section: section, item: item || null }); }
+    } catch(e){ this.setState({ section: section, item: item || null }); }
+  }
   toggleTheme(){ this.setState((s) => ({ theme: s.theme === "dark" ? "light" : "dark" })); }
   toggleLang(){ this.setState((s) => ({ lang: s.lang === "ca" ? "en" : "ca" })); }
   toggleFun(){ this.setState((s) => ({ personality: !s.personality })); }
@@ -573,7 +659,7 @@ class Component extends DCLogic {
         ],
         footer: "Fet amb intenció \u00b7 tafi.cat",
         lockChip: "Xifrat", lockEntry: "Entrada xifrada", lockProject: "Projecte privat", lockBook: "Llibre estrella",
-        lockPrompt: "Contrasenya", lockBtn: "Desbloqueja", lockErr: "Contrasenya incorrecta", lockHint: "S'obre amb la teva clau o la mestra", relock: "Amaga"
+        lockPrompt: "Contrasenya", lockBtn: "Desbloqueja", lockErr: "Contrasenya incorrecta", lockHint: "S'obre amb la teva clau o la mestra", relock: "Amaga", back: "Tornar"
       },
       en: {
         brandTag: "journal",
@@ -641,7 +727,7 @@ class Component extends DCLogic {
         ],
         footer: "Made with intent \u00b7 tafi.cat",
         lockChip: "Encrypted", lockEntry: "Encrypted entry", lockProject: "Private project", lockBook: "Star book",
-        lockPrompt: "Password", lockBtn: "Unlock", lockErr: "Wrong password", lockHint: "Opens with your key or the master", relock: "Hide"
+        lockPrompt: "Password", lockBtn: "Unlock", lockErr: "Wrong password", lockHint: "Opens with your key or the master", relock: "Hide", back: "Back"
       }
     };
   }
@@ -658,6 +744,23 @@ class Component extends DCLogic {
     const cards = ["journal","projects","updates","belongings","books"].map((id) => ({
       label: t.nav[id], d: t.cardDesc[id], onClick: () => this.go(id)
     }));
+    const item = this.state.item;
+    const SLUGS = {
+      journal: ["risk-you-cant-see", "build-by-hand", "small-bets-long-games"],
+      projects: ["ledger-09", "forja", "atlas"],
+      books: ["finance", "philosophy", "technical", "fiction"]
+    };
+    const mk = (arr, kind) => (arr || []).map((o, i) => {
+      const slug = (SLUGS[kind] && SLUGS[kind][i]) ? SLUGS[kind][i] : (kind.charAt(0) + i);
+      return Object.assign({}, o, { slug: slug, onOpen: () => this.open(kind, slug) });
+    });
+    const journalList = mk(t.entries, "journal");
+    const projectsList = mk(t.projects, "projects");
+    const booksList = mk(t.books, "books");
+    const findBy = (arr) => arr.filter((o) => o.slug === item)[0] || null;
+    const journalDetail = (sec === "journal" && item) ? findBy(journalList) : null;
+    const projectDetail = (sec === "projects" && item) ? findBy(projectsList) : null;
+    const bookDetail = (sec === "books" && item) ? findBy(booksList) : null;
     return {
       t: t,
       nav: nav,
@@ -674,6 +777,8 @@ class Component extends DCLogic {
       funColor: this.state.personality ? "var(--accent-bright)" : "var(--faint)",
       showEmbers: this.state.personality || (((this.props && this.props.animLevel) || "standard") === "dramatic"),
       langOther: this.state.lang === "ca" ? "EN" : "CA",
+      showUK: this.state.lang === "ca",
+      showCAT: this.state.lang === "en",
       themeIsDark: this.state.theme === "dark",
       themeIsLight: this.state.theme === "light",
       isDramatic: ((this.props && this.props.animLevel) || "standard") === "dramatic",
@@ -685,7 +790,13 @@ class Component extends DCLogic {
       isBooks: sec === "books",
       lockedEntries: this.buildViews((this.secrets().entries) || []),
       lockedProjects: this.buildViews((this.secrets().projects) || []),
-      lockedBooks: this.buildViews((this.secrets().books) || [])
+      lockedBooks: this.buildViews((this.secrets().books) || []),
+      journalList: journalList, projectsList: projectsList, booksList: booksList,
+      journalDetail: journalDetail, projectDetail: projectDetail, bookDetail: bookDetail,
+      journalIsDetail: !!journalDetail, journalIsList: !journalDetail,
+      projectsIsDetail: !!projectDetail, projectsIsList: !projectDetail,
+      booksIsDetail: !!bookDetail, booksIsList: !bookDetail,
+      goBack: () => this.go(this.state.section)
     };
   }
 }
