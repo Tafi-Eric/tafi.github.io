@@ -50,6 +50,7 @@
   }
 </style>
 <script src="taficrypto.js"></script>
+<script src="content.js"></script>
 <script src="secrets.js"></script>
 </helmet>
 
@@ -246,7 +247,7 @@
             </div>
             <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,46px);margin:14px 0 0;letter-spacing:.5px;line-height:1.1;">{{ journalDetail.t }}</h1>
             <div style="height:2px;width:54px;background:var(--accent);margin:22px 0;"></div>
-            <p style="font-family:'EB Garamond',serif;font-size:20px;line-height:1.7;color:var(--text);margin:0;">{{ journalDetail.x }}</p>
+            <p style="font-family:'EB Garamond',serif;font-size:20px;line-height:1.7;color:var(--text);margin:0;white-space:pre-line;">{{ journalDetail.body }}</p>
           </article>
         </sc-if>
       </section>
@@ -306,7 +307,7 @@
               <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-dim);padding:5px 11px;border-radius:2px;white-space:nowrap;">{{ projectDetail.s }}</span>
             </div>
             <div style="height:2px;width:54px;background:var(--accent);margin:22px 0;"></div>
-            <p style="font-family:'EB Garamond',serif;font-size:20px;line-height:1.7;color:var(--text);margin:0;">{{ projectDetail.d }}</p>
+            <p style="font-family:'EB Garamond',serif;font-size:20px;line-height:1.7;color:var(--text);margin:0;white-space:pre-line;">{{ projectDetail.body }}</p>
           </div>
         </sc-if>
       </section>
@@ -321,13 +322,13 @@
           <p style="font-family:'EB Garamond',serif;font-size:19px;color:var(--muted);margin:12px 0 0;max-width:54ch;">{{ t.updatesLead }}</p>
           <div style="height:2px;width:64px;background:var(--accent);margin-top:20px;"></div>
         </div>
-        <sc-for list="{{ t.updates }}" as="u" hint-placeholder-count="3">
-          <div data-reveal="1" style="animation:rise .6s ease both;display:grid;grid-template-columns:clamp(68px,18vw,96px) 1fr;gap:clamp(14px,4vw,22px);padding:24px 0;border-top:1px solid var(--line);align-items:baseline;">
+        <sc-for list="{{ updatesList }}" as="u" hint-placeholder-count="3">
+          <div data-reveal="1" style="animation:rise .6s ease both;display:grid;grid-template-columns:clamp(74px,20vw,108px) 1fr;gap:clamp(16px,4vw,28px);padding:26px 0;border-top:1px solid var(--line);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:1px;padding-top:4px;">{{ u.date }}</div>
             <div>
-              <div style="font-family:var(--display);font-weight:700;font-size:24px;color:var(--accent);">{{ u.v }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:1px;margin-top:4px;">{{ u.date }}</div>
+              <h3 style="font-family:var(--display);font-weight:600;font-size:23px;color:var(--text);margin:0;line-height:1.15;">{{ u.title }}</h3>
+              <p style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.6;color:var(--muted);margin:8px 0 0;white-space:pre-line;">{{ u.body }}</p>
             </div>
-            <p style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.55;color:var(--text);margin:0;">{{ u.d }}</p>
           </div>
         </sc-for>
       </section>
@@ -468,7 +469,10 @@
             </div>
             <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,46px);margin:14px 0 0;letter-spacing:.5px;line-height:1.1;">{{ bookDetail.t }}</h1>
             <div style="height:2px;width:54px;background:var(--accent);margin:22px 0;"></div>
-            <p style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.6;color:var(--muted);margin:0;">{{ bookDetail.a }}</p>
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:1px;color:var(--faint);margin:0;text-transform:uppercase;">{{ bookDetail.a }}</p>
+            <sc-if value="{{ bookHasNote }}" hint-placeholder-val="{{ false }}">
+              <p style="font-family:'EB Garamond',serif;font-size:20px;line-height:1.7;color:var(--text);margin:20px 0 0;white-space:pre-line;">{{ bookDetail.note }}</p>
+            </sc-if>
           </div>
         </sc-if>
       </section>
@@ -506,7 +510,8 @@ class Component extends DCLogic {
     this.mainRef = (el) => { this.mainEl = el; };
   }
 
-  componentDidMount(){ this.applySide(); this.autoUnlock(); this._onHash = () => this.syncHash(); window.addEventListener("hashchange", this._onHash); }
+  componentDidMount(){ this.applySide(); this.autoUnlock(); this.ensureContent(); this._onHash = () => this.syncHash(); window.addEventListener("hashchange", this._onHash); }
+  ensureContent(n){ if (window.TAFI_CONTENT){ this.forceUpdate(); return; } if ((n || 0) < 50) setTimeout(() => this.ensureContent((n || 0) + 1), 100); }
   componentWillUnmount(){ if (this._onHash) window.removeEventListener("hashchange", this._onHash); }
   syncHash(){
     const r = { "": "home", "home": "home", "journal": "journal", "projects": "projects", "updates": "updates", "belongings": "belongings", "books": "books" };
@@ -745,18 +750,22 @@ class Component extends DCLogic {
       label: t.nav[id], d: t.cardDesc[id], onClick: () => this.go(id)
     }));
     const item = this.state.item;
-    const SLUGS = {
-      journal: ["risk-you-cant-see", "build-by-hand", "small-bets-long-games"],
-      projects: ["ledger-09", "forja", "atlas"],
-      books: ["finance", "philosophy", "technical", "fiction"]
-    };
-    const mk = (arr, kind) => (arr || []).map((o, i) => {
-      const slug = (SLUGS[kind] && SLUGS[kind][i]) ? SLUGS[kind][i] : (kind.charAt(0) + i);
-      return Object.assign({}, o, { slug: slug, onOpen: () => this.open(kind, slug) });
-    });
-    const journalList = mk(t.entries, "journal");
-    const projectsList = mk(t.projects, "projects");
-    const booksList = mk(t.books, "books");
+    const lang = this.state.lang;
+    const C = window.TAFI_CONTENT || null;
+    const pick = (f) => (f && typeof f === "object") ? (f[lang] || f.ca || f.en || "") : (f || "");
+    const slugify = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    let journalList, projectsList, booksList, updatesList;
+    if (C) {
+      journalList = (C.journal || []).map((o, i) => { const slug = o.slug || slugify(pick(o.title)) || ("entry-" + i); return { slug: slug, date: o.date || "", tag: pick(o.tag), t: pick(o.title), x: pick(o.excerpt) || pick(o.body).slice(0, 170), body: pick(o.body), onOpen: () => this.open("journal", slug) }; });
+      projectsList = (C.projects || []).map((o, i) => { const slug = o.slug || slugify(pick(o.title)) || ("project-" + i); return { slug: slug, s: pick(o.status), t: pick(o.title), d: pick(o.excerpt) || pick(o.body).slice(0, 170), body: pick(o.body), onOpen: () => this.open("projects", slug) }; });
+      booksList = (C.books || []).map((o, i) => { const slug = o.slug || slugify(pick(o.title)) || ("book-" + i); return { slug: slug, cat: pick(o.category), st: pick(o.status), t: pick(o.title), a: pick(o.author), note: pick(o.note), onOpen: () => this.open("books", slug) }; });
+      updatesList = (C.updates || []).map((o) => ({ date: o.date || "", title: pick(o.title), body: pick(o.body) }));
+    } else {
+      const SLUGS = { journal: ["risk-you-cant-see", "build-by-hand", "small-bets-long-games"], projects: ["ledger-09", "forja", "atlas"], books: ["finance", "philosophy", "technical", "fiction"] };
+      const mk = (arr, kind) => (arr || []).map((o, i) => { const slug = (SLUGS[kind] && SLUGS[kind][i]) ? SLUGS[kind][i] : (kind.charAt(0) + i); return Object.assign({ body: o.x, note: "" }, o, { slug: slug, onOpen: () => this.open(kind, slug) }); });
+      journalList = mk(t.entries, "journal"); projectsList = mk(t.projects, "projects"); booksList = mk(t.books, "books");
+      updatesList = (t.updates || []).map((u) => ({ date: u.date || "", title: u.v || "", body: u.d || "" }));
+    }
     const findBy = (arr) => arr.filter((o) => o.slug === item)[0] || null;
     const journalDetail = (sec === "journal" && item) ? findBy(journalList) : null;
     const projectDetail = (sec === "projects" && item) ? findBy(projectsList) : null;
@@ -791,11 +800,12 @@ class Component extends DCLogic {
       lockedEntries: this.buildViews((this.secrets().entries) || []),
       lockedProjects: this.buildViews((this.secrets().projects) || []),
       lockedBooks: this.buildViews((this.secrets().books) || []),
-      journalList: journalList, projectsList: projectsList, booksList: booksList,
+      journalList: journalList, projectsList: projectsList, booksList: booksList, updatesList: updatesList,
       journalDetail: journalDetail, projectDetail: projectDetail, bookDetail: bookDetail,
       journalIsDetail: !!journalDetail, journalIsList: !journalDetail,
       projectsIsDetail: !!projectDetail, projectsIsList: !projectDetail,
       booksIsDetail: !!bookDetail, booksIsList: !bookDetail,
+      bookHasNote: !!(bookDetail && bookDetail.note),
       goBack: () => this.go(this.state.section)
     };
   }
