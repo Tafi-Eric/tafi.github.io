@@ -411,6 +411,31 @@
             <figcaption style="padding:13px 14px;font-family:var(--display);font-size:17px;color:var(--text);text-align:center;border-top:1px solid var(--line);">Slain Black Skull</figcaption>
           </figure>
         </div>
+        <div data-reveal="1" style="animation:rise .6s ease both;margin:32px 0 20px;">
+          <div style="font-family:var(--display);font-weight:600;font-size:26px;color:var(--text);">{{ t.grimeyTitle }}</div>
+          <p style="font-family:'EB Garamond',serif;font-size:17px;color:var(--muted);margin:6px 0 0;">{{ t.grimeyLead }}</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:18px;">
+          <figure data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;margin:0;width:240px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);" style-hover="border-color:var(--accent);transform:translateY(-4px);">
+            <img src="Garbo%20Puss%20v4%20Acid%20Punk.jpg" alt="Garbo Puss v4 Acid Punk" style="display:block;width:240px;height:216px;object-fit:cover;"/>
+            <figcaption style="padding:13px 14px;font-family:var(--display);font-size:17px;color:var(--text);text-align:center;border-top:1px solid var(--line);">Garbo Puss v4 Acid Punk</figcaption>
+          </figure>
+          <figure data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;margin:0;width:240px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);" style-hover="border-color:var(--accent);transform:translateY(-4px);">
+            <img src="Trash%20Panda%20v4%20Akira.jpg" alt="Trash Panda v4 Akira" style="display:block;width:240px;height:216px;object-fit:cover;"/>
+            <figcaption style="padding:13px 14px;font-family:var(--display);font-size:17px;color:var(--text);text-align:center;border-top:1px solid var(--line);">Trash Panda v4 Akira</figcaption>
+          </figure>
+        </div>
+
+        <div data-reveal="1" style="animation:rise .6s ease both;margin:32px 0 20px;">
+          <div style="font-family:var(--display);font-weight:600;font-size:26px;color:var(--text);">{{ t.doctorTitle }}</div>
+          <p style="font-family:'EB Garamond',serif;font-size:17px;color:var(--muted);margin:6px 0 0;">{{ t.doctorLead }}</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:18px;">
+          <figure data-reveal="1" style="animation:rise .6s ease both;transition:border-color .25s, transform .25s;margin:0;width:240px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--surface);" style-hover="border-color:var(--accent);transform:translateY(-4px);">
+            <img src="Autopsy%20Exploratory%20Byte.jpg" alt="Autopsy Exploratory Byte" style="display:block;width:240px;height:216px;object-fit:cover;"/>
+            <figcaption style="padding:13px 14px;font-family:var(--display);font-size:17px;color:var(--text);text-align:center;border-top:1px solid var(--line);">Autopsy Exploratory Byte</figcaption>
+          </figure>
+        </div>
       </section>
     </sc-if>
 
@@ -654,6 +679,10 @@ class Component extends DCLogic {
         keyboardRows: [ {k:"Model",v:"TKD Cycle 7 (70%)"}, {k:"Keycaps",v:"GMK Blot"}, {k:"Switches",v:"Vertex V1"}, {k:"Placa",v:"Alumini"} ],
         dragonsTitle: "Els meus dracs",
         dragonsLead: "Keycaps esculpits a mà. Cada drac, un caigut.",
+        grimeyTitle: "Brut com ******",
+        grimeyLead: "Adorables animalets",
+        doctorTitle: "Doctor, tenim un problema!",
+        doctorLead: "Em temo que és massa tard...",
         booksTitle: "Llibres",
         booksLead: "Lectures que deixen marca. La biblioteca s'omplirà aviat.",
         books: [
@@ -721,7 +750,11 @@ class Component extends DCLogic {
         ],
         keyboardRows: [ {k:"Model",v:"TKD Cycle 7 (70%)"}, {k:"Keycaps",v:"GMK Blot"}, {k:"Switches",v:"Vertex V1"}, {k:"Plate",v:"Aluminium"} ],
         dragonsTitle: "My dragons",
-        dragonsLead: "Hand-sculpted keycaps. Each dragon, a fallen one.",
+        dragonsLead: "Each dragon, a fallen one.",
+        grimeyTitle: "Grimey as ****",
+        grimeyLead: "Adorable little critters",
+        doctorTitle: "Doctor, we have a problem!",
+        doctorLead: "I'm afraid it's too late...",
         booksTitle: "Books",
         booksLead: "Reads that leave a mark. The library fills soon.",
         books: [
